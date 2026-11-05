@@ -1,0 +1,12 @@
+{
+  "id": "bridge.a2c.result-from-app-invalid",
+  "valid": false,
+  "value": {
+    "type": "result",
+    "re": "d17",
+    "ok": true,
+    "value": [
+      "8737899170"
+    ]
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "id": "bridge.c2a.register-id-control-char-invalid",
+  "valid": false,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "actions": [],
+    "values": [],
+    "schema": [
+      {
+        "id": "Auto\tFarm",
+        "type": "Toggle",
+        "title": "Auto farm",
+        "path": [
+          "Main",
+          "Farming"
+        ]
+      }
+    ]
+  }
+}

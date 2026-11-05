@@ -1,0 +1,24 @@
+{
+  "id": "bridge.c2a.register-path-depth-5-invalid",
+  "valid": false,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "actions": [],
+    "values": [],
+    "schema": [
+      {
+        "id": "AutoFarm",
+        "type": "Toggle",
+        "title": "Auto farm",
+        "path": [
+          "Games",
+          "Pet Sim",
+          "Main",
+          "Farming",
+          "Auto"
+        ]
+      }
+    ]
+  }
+}

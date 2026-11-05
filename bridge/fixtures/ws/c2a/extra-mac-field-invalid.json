@@ -1,0 +1,9 @@
+{
+  "id": "bridge.c2a.extra-mac-field-invalid",
+  "valid": false,
+  "value": {
+    "type": "status",
+    "state": "playing",
+    "mac": "cc4dffa7a19dc4e7297f0d41b0e9ba85d023a83a535adce0dc354d22a9328d0f"
+  }
+}

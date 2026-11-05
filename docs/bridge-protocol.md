@@ -442,8 +442,11 @@ inside `OnMessage`]**.
 - **Empty-map gotcha.** `HttpService:JSONEncode({})` emits `[]`. Both validators
   accept `[]` as an empty map wherever a map is expected (`values`, `input`).
   Fixtures cover it.
-- **Strictness.** An unknown top-level key or an unknown `type` makes a frame
-  invalid. Both ends ship from one build, so strictness only catches bugs.
+- **Strictness.** An unknown key in any fixed-key object (the frame, an action,
+  an input, a declared value, an element, `executor`, `ethos`, `ethos.config`) or
+  an unknown `type` makes a frame invalid. Maps keyed by ids or names (`values`,
+  `input`, `addons`) are open. A schema element never carries a value. Both ends
+  ship from one build, so strictness only catches bugs.
 - Third-party data (action/value/schema definitions) is **sanitised by the
   bridge API layer before it is sent**: only known keys are copied, strings are
   clipped to their caps on UTF-8 boundaries, counts over a cap are dropped with
@@ -455,6 +458,8 @@ Field rules used throughout:
   `@` and `/` (add-on ids are `@<Name>/<id>`). Unique within an owner across its
   actions, declared values and schema elements.
 - **Owner**: 1–40 chars `[A-Za-z0-9 _.-]`.
+- **Sizes**: every string cap counts UTF-8 bytes. A value's size is the byte
+  length of its compact JSON encoding.
 
 ---
 
@@ -563,6 +568,9 @@ An owner closing sends
 | `values` | ≤ 100 items `{id, label ≤ 100, unit? ≤ 20}`. Read-only status-board declarations. |
 | `schema` | A **flat array** of elements (≤ 2000). Each element carries a `path` **[graft: path-based schema from Registry.place, not a fixed tabs→sections tree, so categories and sub-tabs survive]**. |
 | Element | `{type 1–40 ASCII, id?, title? ≤ 200, description? ≤ 2000, path: 1–4 strings ≤ 200, min?/max?/step? finite, options? ≤ 500 strings ≤ 200, multi? bool, locked? string reason, hidden? true, secret? true, max? (progress)}`. |
+| `more` | Optional `true`: another part of this registration follows (§9.5). |
+
+`actions`, `values` and `schema` are required; an empty list is `[]`.
 
 - **`path`** is `[category?, tab, subtab?, section]`, 1–4 strings, from
   `Registry.place(entry, " › ")` split on ` › `, repeats collapsed. The app
@@ -586,7 +594,9 @@ An owner closing sends
 ```
 
 - Keys are ids that owner registered (declared values or schema elements). Each
-  value is non-null JSON ≤ 8 KiB. The app keeps ≤ 256 KiB per owner, checked on
+  value is non-null JSON ≤ 8 KiB. The app keeps ≤ 256 KiB per owner (the sum of
+  the sizes of the owner's current values, §4; a single frame over it is invalid
+  on its own), checked on
   the app side **and** against a shared `limits-valid.json` the bridge sanitiser
   also reads, so the two cannot drift **[graft: shared limits fixture, incl. the
   256 KiB per-owner aggregate the bridge did not check]**.
@@ -672,7 +682,7 @@ loadout.
 {"type":"loadout","id":"d21",
  "script":"script_key = \"KEY_FROM_VAULT\"\nloadstring(game:HttpGet(\"https://api.luarmor.net/files/v3/loaders/LOADER_ID.lua\"))()",
  "ethos":{"config":{"local":"Farm"},"addons":["Auto parry"],"hideWindow":true}}
-{"type":"loadout","id":"d21","ethos":{"config":{"cloud":"cfg_8f2c41e0-77aa-4d1b-9c55-0a1b2c3d4e5f6a7b"}}}
+{"type":"loadout","id":"d21","ethos":{"config":{"cloud":"cfg_8f2c41e0-77aa-4d1b-9c55-0a1b2c3d4e5f"}}}
 {"type":"loadout","id":"d21","script":"print('hi')"}
 ```
 
@@ -945,6 +955,11 @@ is ~6 KB; a large script (~600) ~92 KB. A `register` with > 100 elements is spli
 into frames of ≤ 100 elements, and the app builds the new schema and swaps it in
 atomically, so a reconnect never shows a half-filled mirror
 **[graft: frame split + atomic swap; fix: snapshot's 34 KB single unsplit frame]**.
+Every part but the last carries `"more": true`. The app concatenates the parts'
+`actions`, `values` and `schema`, takes `title` from the first part, checks the
+caps and id uniqueness on the whole registration, and swaps it in when the part
+without `more` arrives. The 2000-element cap holds per frame and per
+registration.
 
 ---
 
@@ -1074,9 +1089,11 @@ reads late results, and `set` coalesces latest-value-wins per `(alt, owner, key)
 
 ## 14. Fixture catalogue
 
-Shared files `bridge/fixtures/{ws,mirror}/<group>/<name>.json`, each
-`{"id":"bridge.<group>.<name>","valid":bool,"value":...}` — the shape of the
-existing `docs/fixtures/ws` files. The name ends in `-valid` exactly when `valid`
+Shared files `bridge/fixtures/ws/<group>/<name>.json`,
+`bridge/fixtures/mirror/<name>.json` and `bridge/fixtures/ws/limits-valid.json`,
+each `{"id":"bridge.<group>.<name>","valid":bool,"value":...}` where `<group>` is
+the file's folder (`crypto`, `auth`, `c2a`, `a2c`, `mirror`, `ws`) — the shape of
+the existing `docs/fixtures/ws` files. The name ends in `-valid` exactly when `valid`
 is true; both suites assert that and that `id` matches the path. **Rust**
 (`src/ethos/bridge/protocol.rs` tests) reads them from
 `CARGO_MANIFEST_DIR/../bridge/fixtures`; **Lune** (`bridge/tests/fixtures.luau`)
@@ -1091,7 +1108,36 @@ accepted, invalid rejected); the *sender* (the real stub/bridge in Lune, the rea
 app-emit in Rust) proves it emits each valid fixture deep-equal (golden tests)
 **[graft from minimal: sender-side golden tests]**.
 
-### 14.1 `ws/crypto/` — `{kind, …inputs, expected}`
+**Value shapes.** Key order never matters.
+
+- `ws/auth`, `ws/c2a`, `ws/a2c` and `mirror/values-*`: `value` is the decoded
+  frame.
+- `set-*` (in `ws/a2c` and `mirror`): `{"element": <stored element>, "frame":
+  <set frame>}`, because whether a value is required, in range or an option
+  depends on the stored element (§5.3).
+- `mirror/row-*`: `{"element": <schema element>, "value": <its value>}`, with
+  `value` left out when the element carries none (secret Input, Button, Text).
+  `mirror/schema-all-types-valid` is a `register.schema` array; `mirror/apply-*`
+  is the `ethos.apply` input (§10).
+- `ws/crypto`: `sha256` is `{kind, messageHex, expected}` and `hmac` is
+  `{kind, keyHex, messageHex, expected}`, bytes as lowercase hex. `handshake` is
+  `{kind, token, port, nc, ns, source, sourceHash, clientProof, serverProof}`,
+  valid exactly when `sourceHash` is `H(source)` and both presented proofs equal
+  the §3.2 proofs for those inputs.
+- `ws/limits-valid`: a flat map from a camelCase cap name to a positive integer
+  (`…Bytes`, `…Seconds`, `…Ms`, or a count).
+- An empty map is written `[]`, never `{}` (what `JSONEncode` emits, and Lune
+  cannot tell them apart); golden deep-equal treats `{}` and `[]` as equal.
+- Absent means the key is left out. `null` appears only in `values-null-invalid`
+  and `set-null-value-invalid`. Lune decodes `null` as absent, so it sees the
+  `set` case as a missing value (still invalid) and the `values` case as an empty
+  map; Rust, its receiver, judges that one.
+- JSON has no NaN: `row-slider-nan-invalid` carries the string `"NaN"`, and
+  non-finite numbers are generated in tests.
+- A verdict covers the whole value: a `register` with one bad element is
+  `-invalid`, though the app still draws its good elements (§5.2).
+
+### 14.1 `ws/crypto/`
 
 | Name | Proves |
 | --- | --- |
@@ -1126,6 +1172,7 @@ transcript injection); `proof-valid`; `proof-non-hex-invalid`;
 `status-bad-state-invalid`; `status-fps-negative-invalid`;
 `register-valid` (the §5.2 example: every piece, path-based schema);
 `register-unknown-element-type-valid`; `register-close-valid` (empty lists);
+`register-more-valid` (a split part, §9.5);
 `register-duplicate-id-invalid`; `register-owner-empty-invalid`;
 `register-owner-41-invalid`; `register-owner-control-char-invalid`;
 `register-id-control-char-invalid`; `register-101-actions-invalid`;

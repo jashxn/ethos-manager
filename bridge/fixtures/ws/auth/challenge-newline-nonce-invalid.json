@@ -1,0 +1,9 @@
+{
+  "id": "bridge.auth.challenge-newline-nonce-invalid",
+  "valid": false,
+  "value": {
+    "v": 1,
+    "type": "auth.challenge",
+    "nonce": "5b7687b0d4f2e27712388be3eb5cc196\n3b6700e57325a330f9f08905aa5e552"
+  }
+}

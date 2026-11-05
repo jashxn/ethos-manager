@@ -1,0 +1,9 @@
+{
+  "id": "bridge.auth.begin-uppercase-nonce-invalid",
+  "valid": false,
+  "value": {
+    "v": 1,
+    "type": "auth.begin",
+    "nonce": "61C3A46F9DE2F8FE55AAD88D2D21C243CCF7A99B8CED3C68B99DE3B579A272C3"
+  }
+}

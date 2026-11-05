@@ -1,0 +1,8 @@
+{
+  "id": "bridge.mirror.apply-config-and-cloud-invalid",
+  "valid": false,
+  "value": {
+    "config": "Farm",
+    "cloud": "cfg_8f2c41e0-77aa-4d1b-9c55-0a1b2c3d4e5f"
+  }
+}

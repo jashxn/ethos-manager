@@ -1,0 +1,9 @@
+{
+  "id": "bridge.c2a.values-empty-array-valid",
+  "valid": true,
+  "value": {
+    "type": "values",
+    "owner": "Ethos",
+    "values": []
+  }
+}

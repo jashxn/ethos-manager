@@ -1,0 +1,24 @@
+{
+  "id": "bridge.a2c.set-missing-value-invalid",
+  "valid": false,
+  "value": {
+    "element": {
+      "id": "WalkSpeed",
+      "type": "Slider",
+      "title": "Walk speed",
+      "path": [
+        "Main",
+        "Farming"
+      ],
+      "min": 16,
+      "max": 100,
+      "step": 1
+    },
+    "frame": {
+      "type": "set",
+      "id": "d20",
+      "owner": "Ethos",
+      "key": "WalkSpeed"
+    }
+  }
+}

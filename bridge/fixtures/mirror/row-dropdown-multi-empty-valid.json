@@ -1,0 +1,22 @@
+{
+  "id": "bridge.mirror.row-dropdown-multi-empty-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "Eggs",
+      "type": "Dropdown",
+      "title": "Eggs",
+      "path": [
+        "Main",
+        "Eggs"
+      ],
+      "options": [
+        "Grass Egg",
+        "Mining Egg",
+        "Ocean Egg"
+      ],
+      "multi": true
+    },
+    "value": []
+  }
+}

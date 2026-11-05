@@ -1,0 +1,117 @@
+{
+  "id": "bridge.c2a.register-valid",
+  "valid": true,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "title": "Ethos",
+    "actions": [
+      {
+        "id": "rejoin",
+        "label": "Rejoin server",
+        "description": "Teleports back into this server"
+      },
+      {
+        "id": "hatch",
+        "label": "Hatch eggs",
+        "inputs": [
+          {
+            "key": "egg",
+            "type": "choice",
+            "label": "Egg",
+            "options": [
+              "Grass Egg",
+              "Mining Egg"
+            ],
+            "default": "Grass Egg"
+          },
+          {
+            "key": "amount",
+            "type": "number",
+            "min": 1,
+            "max": 1000,
+            "default": 50
+          }
+        ]
+      }
+    ],
+    "values": [
+      {
+        "id": "@stats.playtime",
+        "label": "Playtime",
+        "unit": "s"
+      },
+      {
+        "id": "@stats.executions",
+        "label": "Executions"
+      }
+    ],
+    "schema": [
+      {
+        "id": "AutoFarm",
+        "type": "Toggle",
+        "title": "Auto farm",
+        "path": [
+          "Main",
+          "Farming"
+        ]
+      },
+      {
+        "id": "WalkSpeed",
+        "type": "Slider",
+        "title": "Walk speed",
+        "path": [
+          "Main",
+          "Farming"
+        ],
+        "min": 16,
+        "max": 100,
+        "step": 1
+      },
+      {
+        "id": "Keep",
+        "type": "Range",
+        "title": "Keep between",
+        "path": [
+          "Main",
+          "Farming"
+        ],
+        "min": 0,
+        "max": 5000,
+        "step": 50
+      },
+      {
+        "id": "Mode",
+        "type": "Dropdown",
+        "title": "Mode",
+        "path": [
+          "Main",
+          "Eggs"
+        ],
+        "options": [
+          "Nearest",
+          "Strongest"
+        ],
+        "multi": false
+      },
+      {
+        "id": "ApiKey",
+        "type": "Input",
+        "title": "Agent key",
+        "path": [
+          "Settings",
+          "Agent"
+        ],
+        "secret": true
+      },
+      {
+        "id": "Status",
+        "type": "Text",
+        "title": "Farming area 3",
+        "path": [
+          "Main"
+        ]
+      }
+    ]
+  }
+}

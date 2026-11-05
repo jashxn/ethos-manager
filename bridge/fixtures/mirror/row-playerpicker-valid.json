@@ -1,0 +1,17 @@
+{
+  "id": "bridge.mirror.row-playerpicker-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "Target",
+      "type": "PlayerPicker",
+      "title": "Target",
+      "path": [
+        "Main",
+        "Combat"
+      ],
+      "multi": false
+    },
+    "value": "PetFarm02"
+  }
+}

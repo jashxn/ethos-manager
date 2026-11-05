@@ -1,0 +1,20 @@
+{
+  "id": "bridge.mirror.row-segmented-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "Speed",
+      "type": "Segmented",
+      "title": "Speed",
+      "path": [
+        "Main",
+        "Farming"
+      ],
+      "options": [
+        "Slow",
+        "Fast"
+      ]
+    },
+    "value": "Fast"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "bridge.c2a.register-choice-without-options-valid",
+  "valid": true,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "actions": [
+      {
+        "id": "hatch",
+        "label": "Hatch eggs",
+        "inputs": [
+          {
+            "key": "egg",
+            "type": "choice"
+          }
+        ]
+      }
+    ],
+    "values": [],
+    "schema": []
+  }
+}

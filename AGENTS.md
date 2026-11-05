@@ -26,7 +26,8 @@ Roblox clients, the Ethos account, loadouts, stats, multi-PC and a desktop agent
   `cargo clippy --manifest-path src-tauri/Cargo.toml --all-targets -- -D warnings`.
 - `lune run bridge/tests/run` runs the Lua bridge tests (Lune 0.10.4, pinned in `aftman.toml`;
   0.10.5 breaks server-side socket closes). The Rust cross test needs `lune` on PATH and fails
-  without it.
+  without it. Every top-level `bridge/tests/*.luau` except `*_e2e.luau` returns a table of
+  named test functions; helpers go in `bridge/tests/support/`.
 - `npm run bindings` regenerates the ts-rs types in `src/bindings/` after a Rust type changes.
 - `npm run dev` previews the UI in a browser against the fake backend in `src/dev/mockIpc.ts`.
   Every new command gets a fake there.

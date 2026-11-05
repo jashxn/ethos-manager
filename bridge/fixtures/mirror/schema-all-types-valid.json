@@ -1,0 +1,210 @@
+{
+  "id": "bridge.mirror.schema-all-types-valid",
+  "valid": true,
+  "value": [
+    {
+      "id": "AutoFarm",
+      "type": "Toggle",
+      "title": "Auto farm",
+      "path": [
+        "Main",
+        "Farming"
+      ]
+    },
+    {
+      "id": "WalkSpeed",
+      "type": "Slider",
+      "title": "Walk speed",
+      "path": [
+        "Main",
+        "Farming"
+      ],
+      "min": 16,
+      "max": 100,
+      "step": 1
+    },
+    {
+      "id": "Delay",
+      "type": "Number",
+      "title": "Hatch delay",
+      "path": [
+        "Main",
+        "Eggs"
+      ]
+    },
+    {
+      "id": "Keep",
+      "type": "Range",
+      "title": "Keep between",
+      "path": [
+        "Main",
+        "Farming"
+      ],
+      "min": 0,
+      "max": 5000,
+      "step": 50
+    },
+    {
+      "id": "Mode",
+      "type": "Dropdown",
+      "title": "Mode",
+      "path": [
+        "Main",
+        "Eggs"
+      ],
+      "options": [
+        "Nearest",
+        "Strongest"
+      ],
+      "multi": false
+    },
+    {
+      "id": "Eggs",
+      "type": "Dropdown",
+      "title": "Eggs",
+      "path": [
+        "Main",
+        "Eggs"
+      ],
+      "options": [
+        "Grass Egg",
+        "Mining Egg",
+        "Ocean Egg"
+      ],
+      "multi": true
+    },
+    {
+      "id": "Speed",
+      "type": "Segmented",
+      "title": "Speed",
+      "path": [
+        "Main",
+        "Farming"
+      ],
+      "options": [
+        "Slow",
+        "Fast"
+      ]
+    },
+    {
+      "id": "Rarities",
+      "type": "Checklist",
+      "title": "Rarities",
+      "path": [
+        "Main",
+        "Eggs"
+      ],
+      "options": [
+        "Common",
+        "Rare",
+        "Epic"
+      ]
+    },
+    {
+      "id": "Nickname",
+      "type": "Input",
+      "title": "Nickname",
+      "path": [
+        "Settings",
+        "Profile"
+      ]
+    },
+    {
+      "id": "ApiKey",
+      "type": "Input",
+      "title": "Agent key",
+      "path": [
+        "Settings",
+        "Agent"
+      ],
+      "secret": true
+    },
+    {
+      "id": "Accent",
+      "type": "Colorpicker",
+      "title": "Accent",
+      "path": [
+        "Settings",
+        "Theme"
+      ]
+    },
+    {
+      "id": "ToggleKey",
+      "type": "Keybind",
+      "title": "Toggle key",
+      "path": [
+        "Settings",
+        "Keys"
+      ]
+    },
+    {
+      "id": "Target",
+      "type": "PlayerPicker",
+      "title": "Target",
+      "path": [
+        "Main",
+        "Combat"
+      ],
+      "multi": false
+    },
+    {
+      "id": "~3",
+      "type": "Button",
+      "title": "Rejoin server",
+      "path": [
+        "Main"
+      ]
+    },
+    {
+      "id": "Status",
+      "type": "Text",
+      "title": "Farming area 3",
+      "path": [
+        "Main"
+      ]
+    },
+    {
+      "id": "EggProgress",
+      "type": "Progress",
+      "title": "Eggs hatched",
+      "path": [
+        "Main",
+        "Eggs"
+      ],
+      "max": 100
+    },
+    {
+      "id": "~4",
+      "type": "Stats",
+      "title": "Session",
+      "path": [
+        "Main"
+      ]
+    },
+    {
+      "id": "~5",
+      "type": "Table",
+      "title": "Pets",
+      "path": [
+        "Main",
+        "Pets"
+      ]
+    },
+    {
+      "id": "~6",
+      "type": "Log",
+      "title": "Activity",
+      "path": [
+        "Main"
+      ]
+    },
+    {
+      "id": "~7",
+      "type": "Steps",
+      "title": "Setup",
+      "path": [
+        "Settings"
+      ]
+    }
+  ]
+}

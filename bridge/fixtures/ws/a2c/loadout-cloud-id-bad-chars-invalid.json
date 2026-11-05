@@ -1,0 +1,13 @@
+{
+  "id": "bridge.a2c.loadout-cloud-id-bad-chars-invalid",
+  "valid": false,
+  "value": {
+    "type": "loadout",
+    "id": "d21",
+    "ethos": {
+      "config": {
+        "cloud": "cfg_../../../../../../../../../../../../"
+      }
+    }
+  }
+}

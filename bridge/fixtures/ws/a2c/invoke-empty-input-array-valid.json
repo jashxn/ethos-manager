@@ -1,0 +1,11 @@
+{
+  "id": "bridge.a2c.invoke-empty-input-array-valid",
+  "valid": true,
+  "value": {
+    "type": "invoke",
+    "id": "d19",
+    "owner": "Ethos",
+    "action": "rejoin",
+    "input": []
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "id": "bridge.mirror.row-input-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "Nickname",
+      "type": "Input",
+      "title": "Nickname",
+      "path": [
+        "Settings",
+        "Profile"
+      ]
+    },
+    "value": "Farmer"
+  }
+}

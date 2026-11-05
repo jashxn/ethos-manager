@@ -1,0 +1,24 @@
+{
+  "id": "bridge.mirror.row-checklist-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "Rarities",
+      "type": "Checklist",
+      "title": "Rarities",
+      "path": [
+        "Main",
+        "Eggs"
+      ],
+      "options": [
+        "Common",
+        "Rare",
+        "Epic"
+      ]
+    },
+    "value": [
+      "Common",
+      "Epic"
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "id": "bridge.c2a.register-input-bad-type-invalid",
+  "valid": false,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "actions": [
+      {
+        "id": "hatch",
+        "label": "Hatch eggs",
+        "inputs": [
+          {
+            "key": "amount",
+            "type": "slider"
+          }
+        ]
+      }
+    ],
+    "values": [],
+    "schema": []
+  }
+}

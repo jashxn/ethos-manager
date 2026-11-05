@@ -1,0 +1,16 @@
+{
+  "id": "bridge.mirror.row-addon-key-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "@Auto parry/Enabled",
+      "type": "Toggle",
+      "title": "Enabled",
+      "path": [
+        "Add-ons",
+        "Auto parry"
+      ]
+    },
+    "value": true
+  }
+}

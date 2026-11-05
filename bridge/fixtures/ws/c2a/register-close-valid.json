@@ -1,0 +1,11 @@
+{
+  "id": "bridge.c2a.register-close-valid",
+  "valid": true,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "actions": [],
+    "values": [],
+    "schema": []
+  }
+}

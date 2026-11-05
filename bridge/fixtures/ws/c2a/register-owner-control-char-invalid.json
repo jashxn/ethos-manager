@@ -1,0 +1,11 @@
+{
+  "id": "bridge.c2a.register-owner-control-char-invalid",
+  "valid": false,
+  "value": {
+    "type": "register",
+    "owner": "Ethos\n",
+    "actions": [],
+    "values": [],
+    "schema": []
+  }
+}

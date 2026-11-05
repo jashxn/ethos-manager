@@ -1,0 +1,14 @@
+{
+  "id": "bridge.mirror.row-text-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "type": "Text",
+      "title": "Farming area 3",
+      "description": "Stand by the fountain",
+      "path": [
+        "Main"
+      ]
+    }
+  }
+}

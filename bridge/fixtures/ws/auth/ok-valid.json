@@ -1,0 +1,10 @@
+{
+  "id": "bridge.auth.ok-valid",
+  "valid": true,
+  "value": {
+    "v": 1,
+    "type": "auth.ok",
+    "proof": "06a67108f4f44ed9cec176e52169b326713b58602ae0fdb34a83edeb50e31316",
+    "source": "return function(ctx) end"
+  }
+}

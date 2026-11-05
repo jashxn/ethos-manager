@@ -1,0 +1,11 @@
+{
+  "id": "bridge.mirror.apply-loadout-valid",
+  "valid": true,
+  "value": {
+    "addons": {
+      "Auto parry": true
+    },
+    "config": "Farm",
+    "hidden": true
+  }
+}

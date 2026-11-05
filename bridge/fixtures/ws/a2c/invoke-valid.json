@@ -1,0 +1,14 @@
+{
+  "id": "bridge.a2c.invoke-valid",
+  "valid": true,
+  "value": {
+    "type": "invoke",
+    "id": "d19",
+    "owner": "Ethos",
+    "action": "hatch",
+    "input": {
+      "egg": "Grass Egg",
+      "amount": 50
+    }
+  }
+}

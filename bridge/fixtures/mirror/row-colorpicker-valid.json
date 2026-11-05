@@ -1,0 +1,16 @@
+{
+  "id": "bridge.mirror.row-colorpicker-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "Accent",
+      "type": "Colorpicker",
+      "title": "Accent",
+      "path": [
+        "Settings",
+        "Theme"
+      ]
+    },
+    "value": "ff8800"
+  }
+}

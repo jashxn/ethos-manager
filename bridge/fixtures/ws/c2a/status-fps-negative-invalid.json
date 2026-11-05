@@ -1,0 +1,8 @@
+{
+  "id": "bridge.c2a.status-fps-negative-invalid",
+  "valid": false,
+  "value": {
+    "type": "status",
+    "fps": -1
+  }
+}

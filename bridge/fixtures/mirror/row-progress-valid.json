@@ -1,0 +1,17 @@
+{
+  "id": "bridge.mirror.row-progress-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "EggProgress",
+      "type": "Progress",
+      "title": "Eggs hatched",
+      "path": [
+        "Main",
+        "Eggs"
+      ],
+      "max": 100
+    },
+    "value": 40
+  }
+}

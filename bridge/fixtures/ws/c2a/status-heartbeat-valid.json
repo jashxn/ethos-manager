@@ -1,0 +1,7 @@
+{
+  "id": "bridge.c2a.status-heartbeat-valid",
+  "valid": true,
+  "value": {
+    "type": "status"
+  }
+}

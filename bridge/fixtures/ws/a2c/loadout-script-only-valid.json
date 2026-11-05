@@ -1,0 +1,9 @@
+{
+  "id": "bridge.a2c.loadout-script-only-valid",
+  "valid": true,
+  "value": {
+    "type": "loadout",
+    "id": "d21",
+    "script": "print('hi')"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "bridge.auth.ok-missing-proof-invalid",
+  "valid": false,
+  "value": {
+    "v": 1,
+    "type": "auth.ok",
+    "source": "return function(ctx) end"
+  }
+}

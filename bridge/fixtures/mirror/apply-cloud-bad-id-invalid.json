@@ -1,0 +1,7 @@
+{
+  "id": "bridge.mirror.apply-cloud-bad-id-invalid",
+  "valid": false,
+  "value": {
+    "cloud": "cfg_123"
+  }
+}

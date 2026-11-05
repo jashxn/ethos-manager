@@ -1,0 +1,19 @@
+{
+  "id": "bridge.mirror.row-slider-nan-invalid",
+  "valid": false,
+  "value": {
+    "element": {
+      "id": "WalkSpeed",
+      "type": "Slider",
+      "title": "Walk speed",
+      "path": [
+        "Main",
+        "Farming"
+      ],
+      "min": 16,
+      "max": 100,
+      "step": 1
+    },
+    "value": "NaN"
+  }
+}

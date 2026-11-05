@@ -1,0 +1,16 @@
+{
+  "id": "bridge.mirror.row-toggle-string-invalid",
+  "valid": false,
+  "value": {
+    "element": {
+      "id": "AutoFarm",
+      "type": "Toggle",
+      "title": "Auto farm",
+      "path": [
+        "Main",
+        "Farming"
+      ]
+    },
+    "value": "true"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "id": "bridge.mirror.apply-config-bad-name-invalid",
+  "valid": false,
+  "value": {
+    "config": "../Farm"
+  }
+}

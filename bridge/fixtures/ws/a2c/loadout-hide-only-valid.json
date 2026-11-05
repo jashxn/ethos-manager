@@ -1,0 +1,11 @@
+{
+  "id": "bridge.a2c.loadout-hide-only-valid",
+  "valid": true,
+  "value": {
+    "type": "loadout",
+    "id": "d21",
+    "ethos": {
+      "hideWindow": true
+    }
+  }
+}

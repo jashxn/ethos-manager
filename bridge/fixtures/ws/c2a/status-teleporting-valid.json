@@ -1,0 +1,8 @@
+{
+  "id": "bridge.c2a.status-teleporting-valid",
+  "valid": true,
+  "value": {
+    "type": "status",
+    "state": "teleporting"
+  }
+}

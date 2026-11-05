@@ -1,0 +1,8 @@
+{
+  "id": "bridge.c2a.status-bad-state-invalid",
+  "valid": false,
+  "value": {
+    "type": "status",
+    "state": "dead"
+  }
+}

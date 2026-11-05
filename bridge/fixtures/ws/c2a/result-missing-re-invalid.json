@@ -1,0 +1,11 @@
+{
+  "id": "bridge.c2a.result-missing-re-invalid",
+  "valid": false,
+  "value": {
+    "type": "result",
+    "ok": true,
+    "value": [
+      "8737899170"
+    ]
+  }
+}

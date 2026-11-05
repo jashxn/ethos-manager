@@ -1,0 +1,9 @@
+{
+  "id": "bridge.c2a.status-valid",
+  "valid": true,
+  "value": {
+    "type": "status",
+    "state": "playing",
+    "fps": 59.8
+  }
+}

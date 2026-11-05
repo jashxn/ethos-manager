@@ -1,0 +1,20 @@
+{
+  "id": "bridge.c2a.register-unknown-element-type-valid",
+  "valid": true,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "actions": [],
+    "values": [],
+    "schema": [
+      {
+        "id": "Speedometer",
+        "type": "Gauge",
+        "title": "Speed",
+        "path": [
+          "Main"
+        ]
+      }
+    ]
+  }
+}

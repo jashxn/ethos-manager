@@ -1,0 +1,10 @@
+{
+  "id": "bridge.auth.begin-identity-invalid",
+  "valid": false,
+  "value": {
+    "v": 1,
+    "type": "auth.begin",
+    "nonce": "61c3a46f9de2f8fe55aad88d2d21c243ccf7a99b8ced3c68b99de3b579a272c3",
+    "userId": 123456789
+  }
+}

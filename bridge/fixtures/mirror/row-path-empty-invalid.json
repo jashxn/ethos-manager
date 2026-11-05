@@ -1,0 +1,13 @@
+{
+  "id": "bridge.mirror.row-path-empty-invalid",
+  "valid": false,
+  "value": {
+    "element": {
+      "id": "AutoFarm",
+      "type": "Toggle",
+      "title": "Auto farm",
+      "path": []
+    },
+    "value": true
+  }
+}

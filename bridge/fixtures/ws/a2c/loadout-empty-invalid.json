@@ -1,0 +1,8 @@
+{
+  "id": "bridge.a2c.loadout-empty-invalid",
+  "valid": false,
+  "value": {
+    "type": "loadout",
+    "id": "d21"
+  }
+}

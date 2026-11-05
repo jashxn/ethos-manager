@@ -1,0 +1,10 @@
+{
+  "id": "bridge.a2c.error-valid",
+  "valid": true,
+  "value": {
+    "type": "error",
+    "code": "invalid_register",
+    "ref": "Ethos",
+    "message": "schema[4]: slider min is above max"
+  }
+}

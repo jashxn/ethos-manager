@@ -1,0 +1,16 @@
+{
+  "id": "bridge.mirror.row-category-path-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "AutoFarm",
+      "type": "Toggle",
+      "title": "Auto farm",
+      "path": [
+        "Games",
+        "Farming"
+      ]
+    },
+    "value": true
+  }
+}

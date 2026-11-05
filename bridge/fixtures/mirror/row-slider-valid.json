@@ -1,0 +1,19 @@
+{
+  "id": "bridge.mirror.row-slider-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "WalkSpeed",
+      "type": "Slider",
+      "title": "Walk speed",
+      "path": [
+        "Main",
+        "Farming"
+      ],
+      "min": 16,
+      "max": 100,
+      "step": 1
+    },
+    "value": 24
+  }
+}

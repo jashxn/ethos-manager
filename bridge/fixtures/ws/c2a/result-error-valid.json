@@ -1,0 +1,10 @@
+{
+  "id": "bridge.c2a.result-error-valid",
+  "valid": true,
+  "value": {
+    "type": "result",
+    "re": "d18",
+    "ok": false,
+    "error": "[string \"Agent\"]:1: attempt to index nil with 'Character'"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "id": "bridge.a2c.run-no-name-valid",
+  "valid": true,
+  "value": {
+    "type": "run",
+    "id": "d17",
+    "code": "return game.PlaceId"
+  }
+}

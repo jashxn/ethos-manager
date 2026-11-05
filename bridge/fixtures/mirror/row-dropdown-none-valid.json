@@ -1,0 +1,21 @@
+{
+  "id": "bridge.mirror.row-dropdown-none-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "Mode",
+      "type": "Dropdown",
+      "title": "Mode",
+      "path": [
+        "Main",
+        "Eggs"
+      ],
+      "options": [
+        "Nearest",
+        "Strongest"
+      ],
+      "multi": false
+    },
+    "value": false
+  }
+}

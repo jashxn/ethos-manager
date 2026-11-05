@@ -1,0 +1,18 @@
+{
+  "id": "bridge.a2c.loadout-valid",
+  "valid": true,
+  "value": {
+    "type": "loadout",
+    "id": "d21",
+    "script": "script_key = \"KEY_FROM_VAULT\"\nloadstring(game:HttpGet(\"https://api.luarmor.net/files/v3/loaders/LOADER_ID.lua\"))()",
+    "ethos": {
+      "config": {
+        "local": "Farm"
+      },
+      "addons": [
+        "Auto parry"
+      ],
+      "hideWindow": true
+    }
+  }
+}

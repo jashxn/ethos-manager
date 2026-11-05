@@ -1,0 +1,11 @@
+{
+  "id": "bridge.c2a.values-bad-owner-invalid",
+  "valid": false,
+  "value": {
+    "type": "values",
+    "owner": "Eth/os",
+    "values": {
+      "AutoFarm": true
+    }
+  }
+}

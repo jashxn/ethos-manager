@@ -1,0 +1,26 @@
+{
+  "id": "bridge.c2a.register-duplicate-id-invalid",
+  "valid": false,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "actions": [
+      {
+        "id": "AutoFarm",
+        "label": "Auto farm"
+      }
+    ],
+    "values": [],
+    "schema": [
+      {
+        "id": "AutoFarm",
+        "type": "Toggle",
+        "title": "Auto farm",
+        "path": [
+          "Main",
+          "Farming"
+        ]
+      }
+    ]
+  }
+}

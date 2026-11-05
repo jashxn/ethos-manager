@@ -1,0 +1,13 @@
+{
+  "id": "bridge.c2a.result-ok-with-error-invalid",
+  "valid": false,
+  "value": {
+    "type": "result",
+    "re": "d17",
+    "ok": true,
+    "value": [
+      "8737899170"
+    ],
+    "error": "boom"
+  }
+}

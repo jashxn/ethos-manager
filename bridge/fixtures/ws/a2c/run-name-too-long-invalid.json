@@ -1,0 +1,10 @@
+{
+  "id": "bridge.a2c.run-name-too-long-invalid",
+  "valid": false,
+  "value": {
+    "type": "run",
+    "id": "d17",
+    "name": "AgentAgentAgentAgentAgentAgentAgentAgent1",
+    "code": "return game.PlaceId"
+  }
+}

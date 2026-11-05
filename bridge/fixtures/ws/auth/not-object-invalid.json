@@ -1,0 +1,7 @@
+{
+  "id": "bridge.auth.not-object-invalid",
+  "valid": false,
+  "value": [
+    "auth.begin"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "bridge.mirror.set-button-no-value-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "~3",
+      "type": "Button",
+      "title": "Rejoin server",
+      "path": [
+        "Main"
+      ]
+    },
+    "frame": {
+      "type": "set",
+      "id": "d20",
+      "owner": "Ethos",
+      "key": "~3"
+    }
+  }
+}

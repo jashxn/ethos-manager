@@ -1,0 +1,32 @@
+{
+  "id": "bridge.mirror.values-mirror-valid",
+  "valid": true,
+  "value": {
+    "type": "values",
+    "owner": "Ethos",
+    "values": {
+      "AutoFarm": true,
+      "WalkSpeed": 24,
+      "Delay": 0.5,
+      "Keep": {
+        "Min": 500,
+        "Max": 5000
+      },
+      "Mode": false,
+      "Eggs": [
+        "Grass Egg"
+      ],
+      "Speed": "Fast",
+      "Rarities": [],
+      "Nickname": "Farmer",
+      "Accent": "ff8800",
+      "ToggleKey": {
+        "Key": "F",
+        "Mode": "Hold"
+      },
+      "Target": false,
+      "EggProgress": 40,
+      "ethos.hidden": false
+    }
+  }
+}

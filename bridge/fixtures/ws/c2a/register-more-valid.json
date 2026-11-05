@@ -1,0 +1,62 @@
+{
+  "id": "bridge.c2a.register-more-valid",
+  "valid": true,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "title": "Ethos",
+    "actions": [
+      {
+        "id": "rejoin",
+        "label": "Rejoin server",
+        "description": "Teleports back into this server"
+      },
+      {
+        "id": "hatch",
+        "label": "Hatch eggs",
+        "inputs": [
+          {
+            "key": "egg",
+            "type": "choice",
+            "label": "Egg",
+            "options": [
+              "Grass Egg",
+              "Mining Egg"
+            ],
+            "default": "Grass Egg"
+          },
+          {
+            "key": "amount",
+            "type": "number",
+            "min": 1,
+            "max": 1000,
+            "default": 50
+          }
+        ]
+      }
+    ],
+    "values": [
+      {
+        "id": "@stats.playtime",
+        "label": "Playtime",
+        "unit": "s"
+      },
+      {
+        "id": "@stats.executions",
+        "label": "Executions"
+      }
+    ],
+    "schema": [
+      {
+        "id": "AutoFarm",
+        "type": "Toggle",
+        "title": "Auto farm",
+        "path": [
+          "Main",
+          "Farming"
+        ]
+      }
+    ],
+    "more": true
+  }
+}

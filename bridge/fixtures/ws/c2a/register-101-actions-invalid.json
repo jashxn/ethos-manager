@@ -1,0 +1,416 @@
+{
+  "id": "bridge.c2a.register-101-actions-invalid",
+  "valid": false,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "actions": [
+      {
+        "id": "action1",
+        "label": "Action 1"
+      },
+      {
+        "id": "action2",
+        "label": "Action 2"
+      },
+      {
+        "id": "action3",
+        "label": "Action 3"
+      },
+      {
+        "id": "action4",
+        "label": "Action 4"
+      },
+      {
+        "id": "action5",
+        "label": "Action 5"
+      },
+      {
+        "id": "action6",
+        "label": "Action 6"
+      },
+      {
+        "id": "action7",
+        "label": "Action 7"
+      },
+      {
+        "id": "action8",
+        "label": "Action 8"
+      },
+      {
+        "id": "action9",
+        "label": "Action 9"
+      },
+      {
+        "id": "action10",
+        "label": "Action 10"
+      },
+      {
+        "id": "action11",
+        "label": "Action 11"
+      },
+      {
+        "id": "action12",
+        "label": "Action 12"
+      },
+      {
+        "id": "action13",
+        "label": "Action 13"
+      },
+      {
+        "id": "action14",
+        "label": "Action 14"
+      },
+      {
+        "id": "action15",
+        "label": "Action 15"
+      },
+      {
+        "id": "action16",
+        "label": "Action 16"
+      },
+      {
+        "id": "action17",
+        "label": "Action 17"
+      },
+      {
+        "id": "action18",
+        "label": "Action 18"
+      },
+      {
+        "id": "action19",
+        "label": "Action 19"
+      },
+      {
+        "id": "action20",
+        "label": "Action 20"
+      },
+      {
+        "id": "action21",
+        "label": "Action 21"
+      },
+      {
+        "id": "action22",
+        "label": "Action 22"
+      },
+      {
+        "id": "action23",
+        "label": "Action 23"
+      },
+      {
+        "id": "action24",
+        "label": "Action 24"
+      },
+      {
+        "id": "action25",
+        "label": "Action 25"
+      },
+      {
+        "id": "action26",
+        "label": "Action 26"
+      },
+      {
+        "id": "action27",
+        "label": "Action 27"
+      },
+      {
+        "id": "action28",
+        "label": "Action 28"
+      },
+      {
+        "id": "action29",
+        "label": "Action 29"
+      },
+      {
+        "id": "action30",
+        "label": "Action 30"
+      },
+      {
+        "id": "action31",
+        "label": "Action 31"
+      },
+      {
+        "id": "action32",
+        "label": "Action 32"
+      },
+      {
+        "id": "action33",
+        "label": "Action 33"
+      },
+      {
+        "id": "action34",
+        "label": "Action 34"
+      },
+      {
+        "id": "action35",
+        "label": "Action 35"
+      },
+      {
+        "id": "action36",
+        "label": "Action 36"
+      },
+      {
+        "id": "action37",
+        "label": "Action 37"
+      },
+      {
+        "id": "action38",
+        "label": "Action 38"
+      },
+      {
+        "id": "action39",
+        "label": "Action 39"
+      },
+      {
+        "id": "action40",
+        "label": "Action 40"
+      },
+      {
+        "id": "action41",
+        "label": "Action 41"
+      },
+      {
+        "id": "action42",
+        "label": "Action 42"
+      },
+      {
+        "id": "action43",
+        "label": "Action 43"
+      },
+      {
+        "id": "action44",
+        "label": "Action 44"
+      },
+      {
+        "id": "action45",
+        "label": "Action 45"
+      },
+      {
+        "id": "action46",
+        "label": "Action 46"
+      },
+      {
+        "id": "action47",
+        "label": "Action 47"
+      },
+      {
+        "id": "action48",
+        "label": "Action 48"
+      },
+      {
+        "id": "action49",
+        "label": "Action 49"
+      },
+      {
+        "id": "action50",
+        "label": "Action 50"
+      },
+      {
+        "id": "action51",
+        "label": "Action 51"
+      },
+      {
+        "id": "action52",
+        "label": "Action 52"
+      },
+      {
+        "id": "action53",
+        "label": "Action 53"
+      },
+      {
+        "id": "action54",
+        "label": "Action 54"
+      },
+      {
+        "id": "action55",
+        "label": "Action 55"
+      },
+      {
+        "id": "action56",
+        "label": "Action 56"
+      },
+      {
+        "id": "action57",
+        "label": "Action 57"
+      },
+      {
+        "id": "action58",
+        "label": "Action 58"
+      },
+      {
+        "id": "action59",
+        "label": "Action 59"
+      },
+      {
+        "id": "action60",
+        "label": "Action 60"
+      },
+      {
+        "id": "action61",
+        "label": "Action 61"
+      },
+      {
+        "id": "action62",
+        "label": "Action 62"
+      },
+      {
+        "id": "action63",
+        "label": "Action 63"
+      },
+      {
+        "id": "action64",
+        "label": "Action 64"
+      },
+      {
+        "id": "action65",
+        "label": "Action 65"
+      },
+      {
+        "id": "action66",
+        "label": "Action 66"
+      },
+      {
+        "id": "action67",
+        "label": "Action 67"
+      },
+      {
+        "id": "action68",
+        "label": "Action 68"
+      },
+      {
+        "id": "action69",
+        "label": "Action 69"
+      },
+      {
+        "id": "action70",
+        "label": "Action 70"
+      },
+      {
+        "id": "action71",
+        "label": "Action 71"
+      },
+      {
+        "id": "action72",
+        "label": "Action 72"
+      },
+      {
+        "id": "action73",
+        "label": "Action 73"
+      },
+      {
+        "id": "action74",
+        "label": "Action 74"
+      },
+      {
+        "id": "action75",
+        "label": "Action 75"
+      },
+      {
+        "id": "action76",
+        "label": "Action 76"
+      },
+      {
+        "id": "action77",
+        "label": "Action 77"
+      },
+      {
+        "id": "action78",
+        "label": "Action 78"
+      },
+      {
+        "id": "action79",
+        "label": "Action 79"
+      },
+      {
+        "id": "action80",
+        "label": "Action 80"
+      },
+      {
+        "id": "action81",
+        "label": "Action 81"
+      },
+      {
+        "id": "action82",
+        "label": "Action 82"
+      },
+      {
+        "id": "action83",
+        "label": "Action 83"
+      },
+      {
+        "id": "action84",
+        "label": "Action 84"
+      },
+      {
+        "id": "action85",
+        "label": "Action 85"
+      },
+      {
+        "id": "action86",
+        "label": "Action 86"
+      },
+      {
+        "id": "action87",
+        "label": "Action 87"
+      },
+      {
+        "id": "action88",
+        "label": "Action 88"
+      },
+      {
+        "id": "action89",
+        "label": "Action 89"
+      },
+      {
+        "id": "action90",
+        "label": "Action 90"
+      },
+      {
+        "id": "action91",
+        "label": "Action 91"
+      },
+      {
+        "id": "action92",
+        "label": "Action 92"
+      },
+      {
+        "id": "action93",
+        "label": "Action 93"
+      },
+      {
+        "id": "action94",
+        "label": "Action 94"
+      },
+      {
+        "id": "action95",
+        "label": "Action 95"
+      },
+      {
+        "id": "action96",
+        "label": "Action 96"
+      },
+      {
+        "id": "action97",
+        "label": "Action 97"
+      },
+      {
+        "id": "action98",
+        "label": "Action 98"
+      },
+      {
+        "id": "action99",
+        "label": "Action 99"
+      },
+      {
+        "id": "action100",
+        "label": "Action 100"
+      },
+      {
+        "id": "action101",
+        "label": "Action 101"
+      }
+    ],
+    "values": [],
+    "schema": []
+  }
+}

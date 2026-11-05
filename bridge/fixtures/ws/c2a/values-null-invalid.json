@@ -1,0 +1,11 @@
+{
+  "id": "bridge.c2a.values-null-invalid",
+  "valid": false,
+  "value": {
+    "type": "values",
+    "owner": "Ethos",
+    "values": {
+      "AutoFarm": null
+    }
+  }
+}

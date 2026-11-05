@@ -1,0 +1,19 @@
+{
+  "id": "bridge.mirror.row-keybind-mode-invalid",
+  "valid": false,
+  "value": {
+    "element": {
+      "id": "ToggleKey",
+      "type": "Keybind",
+      "title": "Toggle key",
+      "path": [
+        "Settings",
+        "Keys"
+      ]
+    },
+    "value": {
+      "Key": "F",
+      "Mode": "Sometimes"
+    }
+  }
+}

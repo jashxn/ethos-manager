@@ -1,0 +1,7 @@
+{
+  "id": "bridge.mirror.apply-hidden-valid",
+  "valid": true,
+  "value": {
+    "hidden": true
+  }
+}

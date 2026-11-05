@@ -1,0 +1,16 @@
+{
+  "id": "bridge.mirror.row-number-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "Delay",
+      "type": "Number",
+      "title": "Hatch delay",
+      "path": [
+        "Main",
+        "Eggs"
+      ]
+    },
+    "value": 0.5
+  }
+}

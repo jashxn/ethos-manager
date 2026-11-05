@@ -1,0 +1,7 @@
+{
+  "id": "bridge.a2c.ping-valid",
+  "valid": true,
+  "value": {
+    "type": "ping"
+  }
+}

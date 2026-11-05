@@ -1,0 +1,14 @@
+{
+  "id": "bridge.a2c.loadout-addons-not-strings-invalid",
+  "valid": false,
+  "value": {
+    "type": "loadout",
+    "id": "d21",
+    "ethos": {
+      "addons": [
+        "Auto parry",
+        5
+      ]
+    }
+  }
+}

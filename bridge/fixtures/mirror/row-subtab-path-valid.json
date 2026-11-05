@@ -1,0 +1,18 @@
+{
+  "id": "bridge.mirror.row-subtab-path-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "AutoFarm",
+      "type": "Toggle",
+      "title": "Auto farm",
+      "path": [
+        "Games",
+        "Pet Sim",
+        "Eggs",
+        "Hatching"
+      ]
+    },
+    "value": true
+  }
+}

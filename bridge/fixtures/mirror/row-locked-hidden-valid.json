@@ -1,0 +1,18 @@
+{
+  "id": "bridge.mirror.row-locked-hidden-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "FastHatch",
+      "type": "Toggle",
+      "title": "Fast hatch",
+      "path": [
+        "Main",
+        "Eggs"
+      ],
+      "locked": "A paid key is required.",
+      "hidden": true
+    },
+    "value": false
+  }
+}

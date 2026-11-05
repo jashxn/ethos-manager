@@ -1,0 +1,10 @@
+{
+  "id": "bridge.c2a.run-from-client-invalid",
+  "valid": false,
+  "value": {
+    "type": "run",
+    "id": "d17",
+    "name": "Agent",
+    "code": "return game.PlaceId"
+  }
+}

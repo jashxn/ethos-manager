@@ -1,0 +1,12 @@
+{
+  "id": "bridge.c2a.result-ok-valid",
+  "valid": true,
+  "value": {
+    "type": "result",
+    "re": "d17",
+    "ok": true,
+    "value": [
+      "8737899170"
+    ]
+  }
+}

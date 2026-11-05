@@ -1,0 +1,26 @@
+{
+  "id": "bridge.c2a.register-input-duplicate-key-invalid",
+  "valid": false,
+  "value": {
+    "type": "register",
+    "owner": "Ethos",
+    "actions": [
+      {
+        "id": "hatch",
+        "label": "Hatch eggs",
+        "inputs": [
+          {
+            "key": "amount",
+            "type": "number"
+          },
+          {
+            "key": "amount",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "values": [],
+    "schema": []
+  }
+}

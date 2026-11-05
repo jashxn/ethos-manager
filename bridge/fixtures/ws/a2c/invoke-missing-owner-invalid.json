@@ -1,0 +1,13 @@
+{
+  "id": "bridge.a2c.invoke-missing-owner-invalid",
+  "valid": false,
+  "value": {
+    "type": "invoke",
+    "id": "d19",
+    "action": "hatch",
+    "input": {
+      "egg": "Grass Egg",
+      "amount": 50
+    }
+  }
+}

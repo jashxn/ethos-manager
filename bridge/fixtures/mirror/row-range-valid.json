@@ -1,0 +1,22 @@
+{
+  "id": "bridge.mirror.row-range-valid",
+  "valid": true,
+  "value": {
+    "element": {
+      "id": "Keep",
+      "type": "Range",
+      "title": "Keep between",
+      "path": [
+        "Main",
+        "Farming"
+      ],
+      "min": 0,
+      "max": 5000,
+      "step": 50
+    },
+    "value": {
+      "Min": 500,
+      "Max": 5000
+    }
+  }
+}
