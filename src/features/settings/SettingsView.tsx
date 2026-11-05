@@ -12,6 +12,7 @@ import { friendly, toast, toastError } from "../../ui/Toast";
 import { MultiNotice, useMultiToggle } from "../launch/Running";
 import { PasswordDialog } from "../vault/PasswordDialog";
 import { unhideUpdate } from "./UpdateBanner";
+import license from "../../../LICENSE?raw";
 
 /** Accent presets: value ("" is the theme's own lime) and name. Any other colour comes from the picker. */
 const ACCENTS: [string, Key][] = [
@@ -70,6 +71,8 @@ const SHORTCUTS: [Key, string][] = [
 
 const backupFilter = () => [{ name: t("settings.backupFilter"), extensions: ["roalt"] }];
 const RELEASES = "https://github.com/jashxn/ethos-manager/releases";
+const UPSTREAM = "https://github.com/inspectsoftware/RoALT";
+const LICENSE_TEXT = license.trim().split(/\n\s*\n/).map((p) => p.split("\n").map((l) => l.trim()).join(p.startsWith("Copyright") ? "\n" : " "));
 const cancelled = () => ({ kind: "cancelled", message: "" });
 
 type VaultDialog = "set" | "change" | "remove" | "export";
@@ -313,12 +316,23 @@ export function SettingsView({ vault, settings, onPerformance, onRecoveryCode }:
 
         <Section id="about" title={t("settings.section.about")}>
         <SelfUpdateRow on={settings.selfUpdate} onChange={(selfUpdate) => set.mutate({ selfUpdate })} />
-        <Row title={<>Ethos Manager <span className="mono">{import.meta.env.APP_VERSION}</span></>} hint={t("settings.aboutHint")} last>
+        <Row title={<>Ethos Manager <span className="mono">{import.meta.env.APP_VERSION}</span></>} hint={t("settings.aboutHint")}>
           <button className="btn" onClick={() => openUrl(RELEASES).catch(toastError)}>
             {t("settings.openReleases")}
             <Icon name="external" size={12} />
           </button>
         </Row>
+        <div lang="en" dir="ltr">
+          <Row title="Based on RoALT" hint="Ethos Manager is based on RoALT by inspectsoftware, used under the MIT License below." last>
+            <button className="btn" onClick={() => openUrl(UPSTREAM).catch(toastError)}>
+              github.com/inspectsoftware/RoALT
+              <Icon name="external" size={12} />
+            </button>
+          </Row>
+          <div className="well selectable flex flex-col gap-2 p-4 mb-4 text-[12px] text-dim">
+            {LICENSE_TEXT.map((p) => <p key={p} className="whitespace-pre-line">{p}</p>)}
+          </div>
+        </div>
         </Section>
         </div>
         <div className="flex flex-col gap-8 min-w-0">
