@@ -16,8 +16,8 @@ use crate::App;
 use crate::commands::{cached_game_name, now_ms};
 use crate::model::{Instance, InstanceState};
 
-/// The "RoALT" application on Discord's Developer Portal; its art asset `roalt` is the logo.
-const CLIENT_ID: &str = "1565066775752741165";
+/// The "Ethos Manager" application on Discord's Developer Portal; its art asset `roalt` is the logo.
+const CLIENT_ID: Option<&str> = None;
 const DOWNLOAD: &str = "https://github.com/jashxn/ethos-manager/releases/latest";
 const INVITE: &str = "https://discord.gg/qcj68tHKCX";
 /// Discord allows about 5 activity updates per 20 s; one is sent only when it changed.
@@ -138,6 +138,9 @@ fn activity((details, state): &(String, String), since_ms: i64) -> Value {
 
 /// Keeps the presence in step on its own thread (pipe I/O blocks).
 pub fn spawn(app: AppHandle) {
+    if CLIENT_ID.is_none() {
+        return;
+    }
     std::thread::spawn(move || {
         let mut pipe: Option<File> = None;
         // What Discord shows now: None when cleared or not connected.

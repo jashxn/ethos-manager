@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { openUrl } from "@tauri-apps/plugin-opener";
 import { QueryClientProvider, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api, asError, events, type Favourite, type SameServer, type Settings, type VaultStatus } from "./api";
 import { qk, queryClient, useAccounts, useGroups, useInstances, useSetSettings, useSettings, useVault } from "./data";
@@ -177,7 +176,6 @@ function Root() {
   );
 }
 
-const DISCORD_INVITE = "https://discord.gg/BG8Zb8AA9k";
 const MAIN_SECTIONS =["home", "play", "accounts", "performance", "debug"] as const;
 const TOOL_SECTIONS = ["servers", "monitor", "discord"] as const;
 type Section = (typeof MAIN_SECTIONS)[number] | (typeof TOOL_SECTIONS)[number] | "settings";
@@ -336,10 +334,6 @@ function Shell({ vault, settings, onRecoveryCode }: { vault: VaultStatus; settin
   );
   const footer = (
     <div className="flex-none flex flex-col gap-3.5 px-3 pt-3 pb-4">
-      <button className="btn w-full" onClick={() => openUrl(DISCORD_INVITE).catch(toastError)}>
-        <Icon name="chat" size={14} />
-        {t("app.joinDiscord")}
-      </button>
       <button className="btn w-full" onClick={() => setDonating(true)}>
         <Icon name="heart" size={14} />
         {t("donate.button")}

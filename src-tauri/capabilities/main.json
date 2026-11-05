@@ -18,8 +18,7 @@
       "allow": [
         { "url": "https://www.roblox.com/*" },
         { "url": "https://github.com/inspectsoftware/*" },
-        { "url": "https://github.com/jashxn/*" },
-        { "url": "https://discord.gg/*" }
+        { "url": "https://github.com/jashxn/*" }
       ]
     }
   ]
