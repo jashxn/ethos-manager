@@ -338,7 +338,7 @@ its old CPU cap stays until it closes, with any new job nested inside it.
 
 Bandwidth limit (the one system change, opt-in): Apply runs a fixed PowerShell script elevated through
 `ShellExecuteExW` with `runas` (a UAC prompt each time; never on its own), with only the range-checked
-integer rate inserted. It sets the outbound QoS policy `RoALT-Roblox` for the Roblox client in ActiveStore,
+integer rate inserted. It sets the outbound QoS policy `EthosManager-Roblox` for the Roblox client in ActiveStore,
 so Windows drops it on restart; status can't be read back without admin, so RoALT records the boot it was
 applied in and asks the user to apply again after a restart.
 
