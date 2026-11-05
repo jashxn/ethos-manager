@@ -1,34 +1,32 @@
 <div align="center">
 
-# RoALT
+# Ethos Manager
 
 ### Every Roblox account you own, signed in, checked and one click from any game.
 
-A fast, local-only account manager and multi-client launcher for Windows.<br>
-Your cookies stay encrypted on your PC. Nothing is sent anywhere except Roblox.
+An open-source account manager and multi-client launcher for Windows, with the Ethos layer on top.<br>
+Your cookies stay encrypted on your PC and go only to Roblox.
 
-[![Latest release](https://img.shields.io/github/v/release/inspectsoftware/RoALT?style=for-the-badge&color=b4f000&labelColor=1a1a1a&label=release)](https://github.com/inspectsoftware/RoALT/releases/latest)
-[![Downloads](https://img.shields.io/github/downloads/inspectsoftware/RoALT/total?style=for-the-badge&color=2b2b2b&labelColor=1a1a1a)](https://github.com/inspectsoftware/RoALT/releases)
+[![Latest release](https://img.shields.io/github/v/release/jashxn/ethos-manager?style=for-the-badge&color=b4f000&labelColor=1a1a1a&label=release)](https://github.com/jashxn/ethos-manager/releases/latest)
 [![Windows 10 | 11](https://img.shields.io/badge/Windows-10%20%7C%2011-0078d4?style=for-the-badge&logo=windows&labelColor=1a1a1a)](#-install)
-[![Discord](https://img.shields.io/badge/Discord-join-5865f2?style=for-the-badge&logo=discord&logoColor=white&labelColor=1a1a1a)](https://discord.gg/qcj68tHKCX)
+[![Based on RoALT](https://img.shields.io/badge/based%20on-RoALT-2b2b2b?style=for-the-badge&labelColor=1a1a1a)](https://github.com/inspectsoftware/RoALT)
 
-[![CI](https://img.shields.io/github/actions/workflow/status/inspectsoftware/RoALT/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/inspectsoftware/RoALT/actions/workflows/ci.yml)
+[![CI](https://img.shields.io/github/actions/workflow/status/jashxn/ethos-manager/ci.yml?branch=main&style=flat-square&label=CI)](https://github.com/jashxn/ethos-manager/actions/workflows/ci.yml)
 ![Tauri 2](https://img.shields.io/badge/Tauri-2-24c8db?style=flat-square&logo=tauri&logoColor=white)
 ![Rust](https://img.shields.io/badge/Rust-2024-dea584?style=flat-square&logo=rust&logoColor=white)
 ![React 19](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react&logoColor=white)
-![No telemetry](https://img.shields.io/badge/telemetry-none-b4f000?style=flat-square)
 
 <br>
 
-[**⬇ Download**](https://github.com/inspectsoftware/RoALT/releases/latest) &nbsp;·&nbsp;
-[**💬 Discord**](https://discord.gg/qcj68tHKCX) &nbsp;·&nbsp;
+[**⬇ Download**](https://github.com/jashxn/ethos-manager/releases/latest) &nbsp;·&nbsp;
 [Quick start](#-quick-start) &nbsp;·&nbsp;
 [Privacy](#-safety-and-privacy) &nbsp;·&nbsp;
-[For developers](#-for-developers)
+[Build from source](#-build-from-source) &nbsp;·&nbsp;
+[Upstream](#-upstream)
 
 <br>
 
-<img src="docs/images/home.png" alt="RoALT's Home page: account tabs, running clients with live previews, and dials for what the clients use" width="900">
+<img src="docs/images/home.png" alt="Ethos Manager's Home page: account tabs, running clients with live previews, and dials for what the clients use" width="900">
 
 </div>
 
@@ -38,27 +36,29 @@ Your cookies stay encrypted on your PC. Nothing is sent anywhere except Roblox.
 
 | For everyone | For developers |
 |---|---|
-| [What is RoALT?](#-what-is-roalt) | [Architecture](#-architecture) |
+| [What is Ethos Manager?](#-what-is-ethos-manager) | [Architecture](#-architecture) |
 | [Features](#-features) | [Tech stack](#-tech-stack) |
 | [Install](#-install) | [Build from source](#-build-from-source) |
 | [Quick start](#-quick-start) | [Project layout](#-project-layout) |
 | [Safety and privacy](#-safety-and-privacy) | [Testing](#-testing) |
-| [FAQ](#-faq) | [Contributing](#-contributing) |
+| [FAQ](#-faq) | [Upstream](#-upstream) |
 | [Community](#-community) | [Cut a release](#-cut-a-release) |
 
 <br>
 
-## 💡 What is RoALT?
+## 💡 What is Ethos Manager?
 
-If you play Roblox on more than one account, you know the routine: sign out, sign in, find the game again,
-and only ever one client open at a time. RoALT removes all of that.
+Ethos Manager is a Windows app for people who play Roblox on more than one account. It is a fork of
+[RoALT](https://github.com/inspectsoftware/RoALT) by inspectsoftware (MIT), and keeps pulling RoALT's updates.
 
-- **Add each account once**, through Roblox's own sign-in page. RoALT keeps it signed in.
-- **See every account at a glance**: online status, Robux, friends, whether the sign-in still works.
-- **Paste any game link** and launch one account, or ten, into it. Even into the same server.
-- **Run several Roblox windows side by side**, and let RoALT bring back any that crash or get kicked.
+- **Everything RoALT does, free and without an account.** Add each account once through Roblox's own sign-in
+  page, see them all at a glance, paste any game link and launch one account or ten, run several clients side by
+  side, and let Ethos Manager bring back any that crash or get kicked.
+- **The Ethos layer, with an Ethos account.** Signing in with Discord, backed by a paid or trial Ethos key, unlocks
+  the parts that talk to the Ethos backend: license tools, cloud configs, add-ons, the live mirror of the Ethos
+  window, stats and multi-PC. Without signing in, none of that runs and nothing goes to the Ethos backend.
 
-It runs entirely on your PC. There is no RoALT account, no RoALT server and no tracking.
+Cookies go only to Roblox, signed in or not.
 
 <table>
 <tr>
@@ -97,7 +97,7 @@ favourites, search and filters. Check sign-ins, one or all, in a click.
 
 ### 🚀 Launch anything
 Paste a game link, place ID, job ID, private server or share link, a profile or `@username`:
-RoALT works out what it is. Join a friend, or save a target as a favourite.
+Ethos Manager works out what it is. Join a friend, or save a target as a favourite.
 
 </td>
 <td valign="top">
@@ -164,14 +164,14 @@ it is signed by Roblox Corporation. Optional auto-update when no client runs.
 Browser-style **account tabs**, each with its own game and options. Every running client as a live preview,
 even hidden ones, in cards you can drag and resize, with dials for what your clients use. Right-click one to
 focus, minimize, shrink it, limit it or close it. Tile all clients in one click. Anti-AFK has its own switch here.
-Prefer vertical tabs? Put your accounts on the side and RoALT's sections along the top, and drag either into your own order.
+Prefer vertical tabs? Put your accounts on the side and Ethos Manager's sections along the top, and drag either into your own order.
 
 </td>
 <td valign="top">
 
 ### 🛡️ Public networks
 Windows calls some networks **Public** (café, hotel, school Wi-Fi). Turn off **Allow public networks** in Settings,
-Security, and RoALT won't launch on them and a master-password vault locks there. It is on by default.
+Security, and Ethos Manager won't launch on them and a master-password vault locks there. It is on by default.
 
 </td>
 </tr>
@@ -202,7 +202,7 @@ Japanese, Korean, Polish, Portuguese (Brazil), Russian, Spanish, Swedish, Thai, 
 <td valign="top">
 
 ### ❤️ Support RoALT
-RoALT is free. The **Donate** button in the sidebar opens a [Roblox gamepass](https://www.roblox.com/games/102259086923102/Donation-Experience#!/store)
+Ethos Manager is free. The **Donate** button in the sidebar supports RoALT's author: it opens a [Roblox gamepass](https://www.roblox.com/games/102259086923102/Donation-Experience#!/store)
 for the amount you pick, and you confirm the purchase on Roblox.
 
 </td>
@@ -220,15 +220,15 @@ for the amount you pick, and you confirm the purchase on Roblox.
 | 🚀 **Play** | Game links, place IDs, `roblox://` links, job IDs, private server links, `roblox.com/share` links (both formats), universes, profiles, `@username`. Join a friend or one of your other accounts. Favourites on the Play page and in the tray. `Ctrl+Enter` to launch. |
 | 🪟 **Batches** | Accounts launch strictly one after another with a stagger (default 6 s). **Same server**: *Pick a server* finds one with room for everyone first; *Follow the first* sends the rest to wherever the first account landed. Cancel at any time; one click re-picks the accounts that didn't launch. |
 | 🔁 **Recovery** | Auto-rejoin after kicks, shutdowns and lost connections (not after you leave on purpose). Opt-in auto-restart for crashes, frozen windows (30 s) and a memory limit. Crash breaker: default 3 relaunches in 10 minutes, with growing backoff. Per-account "Allow disconnect". Crash history with the log's reason. |
-| ↔️ **Free resizing** | Drag a client's edge to any size, past the minimum Roblox holds its window to, and move a small window by its title bar without it growing back. RoALT sizes the window itself (a mouse hook in RoALT's own process); nothing goes into the client. **Start clients tiny** opens every new client at a size you choose. |
-| 🖥️ **Home** | Live preview for every client at 5, 15, 30 or 60 FPS, even hidden ones, with state, game, uptime, CPU and RAM. Drag cards to sort them and resize them from the corner; **Detailed view** off shows only the preview and username. Dials show what all Roblox clients use together. Browser-style **account tabs** give each account its own game and options, and launch one or all of them. **Tab layout** (Settings or the title bar) moves accounts to a list on the side and RoALT's sections to tabs along the top. Drag accounts and sections to sort them, or use `Alt` and the arrow keys; the order is saved, and a launch of all tabs follows it. The **⋯** key, right-click, the menu key or `Shift+F10` for focus, minimize, restore, tiny window (any size, 320×240 by default) and back, CPU limit, efficiency mode, anti-AFK, close. **Tile** fits all clients in a grid on the screen; **Tile micro** lays out micro windows. Minimize all, Restore all. |
+| ↔️ **Free resizing** | Drag a client's edge to any size, past the minimum Roblox holds its window to, and move a small window by its title bar without it growing back. Ethos Manager sizes the window itself (a mouse hook in Ethos Manager's own process); nothing goes into the client. **Start clients tiny** opens every new client at a size you choose. |
+| 🖥️ **Home** | Live preview for every client at 5, 15, 30 or 60 FPS, even hidden ones, with state, game, uptime, CPU and RAM. Drag cards to sort them and resize them from the corner; **Detailed view** off shows only the preview and username. Dials show what all Roblox clients use together. Browser-style **account tabs** give each account its own game and options, and launch one or all of them. **Tab layout** (Settings or the title bar) moves accounts to a list on the side and Ethos Manager's sections to tabs along the top. Drag accounts and sections to sort them, or use `Alt` and the arrow keys; the order is saved, and a launch of all tabs follows it. The **⋯** key, right-click, the menu key or `Shift+F10` for focus, minimize, restore, tiny window (any size, 320×240 by default) and back, CPU limit, efficiency mode, anti-AFK, close. **Tile** fits all clients in a grid on the screen; **Tile micro** lays out micro windows. Minimize all, Restore all. |
 | 🛑 **Stop all** | Hold one button in the sidebar, use the tray, or press a global **panic hotkey** you choose (off by default) to end every Roblox process and stop pending launches and rejoins. |
 | 🌍 **Languages** | English, Arabic (right to left), Bosnian, Chinese (Simplified), Filipino, French, German, Indonesian, Japanese, Korean, Polish, Portuguese (Brazil), Russian, Spanish, Swedish, Thai, Turkish, Vietnamese. |
-| ⏲️ **Automation** | Minimize each new client on launch. Auto-shutdown timer: close the clients and shut the PC down at a set time (survives a RoALT restart, can be cancelled). Hourly Roblox log cleaner (logs older than a day or over 50 MB). Open logs button; RoALT's own logs rotate at 5 MB. |
+| ⏲️ **Automation** | Minimize each new client on launch. Auto-shutdown timer: close the clients and shut the PC down at a set time (survives an Ethos Manager restart, can be cancelled). Hourly Roblox log cleaner (logs older than a day or over 50 MB). Open logs button; Ethos Manager's own logs rotate at 5 MB. |
 | ⚙️ **Launch control** | Custom launch arguments (default and per account, checked before use and never logged), a cooldown between launches, a configurable close grace (1–60 s). |
 | 🎚️ **Limits** | Per client: CPU cap, efficiency mode, core affinity, working-set trim (every N minutes and sooner if a background client grows, or "Page memory out now"). A trim lowers the Memory column for a while; commit size doesn't change. Adaptive manager for background clients; a limit you set on a client wins for that limit. **Memory throttle**: a client whose commit size is over a limit gets a CPU cap, which lowers its frame rate, until it drops under 90 % of the limit. It doesn't free memory; only **Restart on high memory** does, and that disconnects the client. |
-| 🎞️ **FPS cap & graphics** | A default frame-rate cap (5–360), a per-account override and a per-launch one under Play's More options (a rejoin keeps it), plus the lowest graphics for every client (on by default). Set through Roblox's own Maximum Frame Rate and Graphics Quality just before each client starts; your own Roblox settings are put back once it has read them, and again when such a client closes (or when RoALT next starts, if it wasn't running then). Everything performance-related lives in its own **Performance** tab. |
-| 🪶 **Lighter rendering** | Clients RoALT starts get low geometry detail and the graphics flags below (on by default): less GPU time and memory per client. Written just before each client starts and put back once it has read them; skipped under a bootstrapper. |
+| 🎞️ **FPS cap & graphics** | A default frame-rate cap (5–360), a per-account override and a per-launch one under Play's More options (a rejoin keeps it), plus the lowest graphics for every client (on by default). Set through Roblox's own Maximum Frame Rate and Graphics Quality just before each client starts; your own Roblox settings are put back once it has read them, and again when such a client closes (or when Ethos Manager next starts, if it wasn't running then). Everything performance-related lives in its own **Performance** tab. |
+| 🪶 **Lighter rendering** | Clients Ethos Manager starts get low geometry detail and the graphics flags below (on by default): less GPU time and memory per client. Written just before each client starts and put back once it has read them; skipped under a bootstrapper. |
 | 🎚️ **Graphics flags** | Pick MSAA, texture quality, rendering mode, gray sky, no grass and lowest render quality, from the FastFlags Roblox still allows. Roblox may ignore Vulkan and OpenGL. |
 | 👑 **Main account** | Mark an account **Full quality** and its clients keep your own Roblox graphics, without lowest graphics or lighter rendering. |
 | 🕘 **Recent servers** | Each account remembers the servers it reached (stored on this PC); rejoin a public one in a click. |
@@ -236,9 +236,9 @@ for the amount you pick, and you confirm the purchase on Roblox.
 | 📤 **Performance profiles** | Export your performance settings to a file or a share code, or import someone else's: you see what changes, then apply it. Only performance settings travel, never accounts, passwords, launch arguments or hotkeys. |
 | 📶 **Bandwidth** | One upload cap for all Roblox clients through a Windows QoS policy. Applied only when you click Apply (admin prompt); cleared when Windows restarts. |
 | 💤 **Anti-AFK** | Off by default, with a switch on Home. While you are away from the PC, every few minutes each client is briefly brought to the front and gets one F13 press (no game uses it, so the character stays put), so Roblox doesn't kick it after 20 idle minutes. A minimized client is restored for the press and minimized again. Stops the moment you touch the mouse. Roblox only counts a real key press in the window in front: keys posted to a background window don't stop the idle kick (measured). Per-client opt-out. |
-| 🔔 **Discord** | Crash, disconnect, restart and batch alerts, plus an opt-in alert when a client gets into a game. Mute alerts per account. **Rich presence** (on by default, a switch in Settings): your profile shows "Playing RoALT", idling or with the game and how many alts run. |
-| 🔄 **RoALT updates** | Looks for a new RoALT on GitHub Releases at start and every 6 hours (can be turned off; *Check now* in Settings). A banner offers it; *Update now* downloads it, checks its release signature, installs it silently and restarts RoALT. Never installs on its own. |
-| 🧰 **Comfort** | Tray menu with favourites, close to tray, relaunch an ended client in one click, movable data folder, keyboard shortcuts. Dark, light or system theme, any accent colour, and your own background image, with a choice of how much the theme covers it. Optional skip of the splash screen. Your RoALT and Roblox versions at the top of Settings. |
+| 🔔 **Discord** | Crash, disconnect, restart and batch alerts, plus an opt-in alert when a client gets into a game. Mute alerts per account. |
+| 🔄 **Ethos Manager updates** | Looks for a new Ethos Manager on GitHub Releases at start and every 6 hours (can be turned off; *Check now* in Settings). A banner offers it; *Update now* downloads it, checks its release signature, installs it silently and restarts Ethos Manager. Never installs on its own. |
+| 🧰 **Comfort** | Tray menu with favourites, close to tray, relaunch an ended client in one click, movable data folder, keyboard shortcuts. Dark, light or system theme, any accent colour, and your own background image, with a choice of how much the theme covers it. Optional skip of the splash screen. Your Ethos Manager and Roblox versions at the top of Settings. |
 
 </details>
 
@@ -246,25 +246,25 @@ for the amount you pick, and you confirm the purchase on Roblox.
 
 ## 📥 Install
 
-1. Download **`RoALT-Setup-<version>.exe`** from the [latest release](https://github.com/inspectsoftware/RoALT/releases/latest).
-2. Run it. No admin rights needed; it installs to `%LOCALAPPDATA%\Programs\RoALT`.
-3. Start RoALT from the Start menu or the desktop icon.
+1. Download **`EthosManager-Setup-<version>.exe`** from the [latest release](https://github.com/jashxn/ethos-manager/releases/latest).
+2. Run it. No admin rights needed; it installs to `%LOCALAPPDATA%\Programs\Ethos Manager`.
+3. Start Ethos Manager from the Start menu or the desktop icon.
 
 | Requirement | |
 |---|---|
 | Windows | 10 (1809 or later) or 11, x64 |
 | WebView2 Runtime | Built into Windows 11. Setup offers to download it when missing. |
-| Roblox | Installed normally (RoALT can install or update it for you) |
+| Roblox | Installed normally (Ethos Manager can install or update it for you) |
 
 > [!NOTE]
 > The installer isn't code-signed yet, so Windows SmartScreen warns on first run. To be sure the file is genuine,
 > compare its SHA-256 with `SHA256SUMS.txt` on the release page, then choose **More info → Run anyway**.
 >
 > ```powershell
-> Get-FileHash .\RoALT-Setup-0.9.2.exe -Algorithm SHA256
+> Get-FileHash .\EthosManager-Setup-0.1.0.exe -Algorithm SHA256
 > ```
 
-Your accounts and settings live in `%LOCALAPPDATA%\RoALT`. Uninstalling keeps them unless you tick
+Your accounts and settings live in `%LOCALAPPDATA%\EthosManager`. Uninstalling keeps them unless you tick
 **"also delete my data"**.
 
 <br>
@@ -276,7 +276,7 @@ Your accounts and settings live in `%LOCALAPPDATA%\RoALT`. Uninstalling keeps th
 <br>
 
 Press **Add account** (or `Ctrl+N`). A clean Roblox sign-in window opens: sign in as usual, including 2-step or
-passkeys. RoALT keeps the sign-in, closes the window and throws its browser profile away. You can also paste a
+passkeys. Ethos Manager keeps the sign-in, closes the window and throws its browser profile away. You can also paste a
 `.ROBLOSECURITY` cookie; it is checked before it is saved.
 
 </details>
@@ -286,7 +286,7 @@ passkeys. RoALT keeps the sign-in, closes the window and throws its browser prof
 <br>
 
 By default the vault is locked to your Windows account, so it opens silently. For extra protection, set a master
-password in **Settings**. RoALT then asks for it on start and locks itself after you've been idle.
+password in **Settings**. Ethos Manager then asks for it on start and locks itself after you've been idle.
 
 </details>
 
@@ -303,8 +303,8 @@ Pick several accounts to launch a batch. Under **More options**, turn on **Same 
 <summary><b>4. Run several clients at once</b></summary>
 <br>
 
-**Multi-instance** is on by default (the switch is in **Settings → Launching**); start RoALT before Roblox. If Roblox is already open, RoALT says so and offers
-**Close Roblox** or **Take over**. Every client RoALT starts shows up on **Home**
+**Multi-instance** is on by default (the switch is in **Settings → Launching**); start Ethos Manager before Roblox. If Roblox is already open, Ethos Manager says so and offers
+**Close Roblox** or **Take over**. Every client Ethos Manager starts shows up on **Home**
 (`Ctrl+1`), with its state, server and uptime.
 
 </details>
@@ -340,26 +340,26 @@ In **Settings → Launching**, turn on **Auto-rejoin** (and, if you like, **Auto
 <tr>
 <td width="50%" valign="top">
 
-#### ✅ What RoALT does
+#### ✅ What Ethos Manager does
 
-- Talks **only** to `*.roblox.com` and `*.rbxcdn.com`, plus GitHub to look for RoALT updates (can be turned off), and your Discord webhook.
+- Talks **only** to `*.roblox.com` and `*.rbxcdn.com`, plus GitHub to look for Ethos Manager updates (can be turned off), your Discord webhook, and the Ethos backend once you sign in to the Ethos layer.
 - Encrypts every cookie with **AES-256-GCM** under a key protected by **Windows DPAPI**, plus your master password if you set one.
-- Encrypts the **whole database** too (SQLCipher, AES-256), with its own DPAPI-protected key: a copied `roalt.db` can't be read on another PC or Windows account.
+- Encrypts the **whole database** too (SQLCipher, AES-256), with its own DPAPI-protected key: a copied `ethos-manager.db` can't be read on another PC or Windows account.
 - Signs you in through **Roblox's own page**, in a throw-away browser profile.
 - Installs Roblox updates **only** when the installer is signed by Roblox Corporation.
-- Updates itself **only** when you click Update now, and only with an installer that carries RoALT's release signature.
+- Updates itself **only** when you click Update now, and only with an installer that carries Ethos Manager's release signature.
 - Redacts launch tickets from anything it reads in Roblox's logs.
 
 </td>
 <td width="50%" valign="top">
 
-#### 🚫 What RoALT never does
+#### 🚫 What Ethos Manager never does
 
 - **Never** reads or writes the Roblox client's memory or files, with two exceptions for the clients it starts: Roblox's own settings file (`GlobalBasicSettings_13.xml`, only the frame-rate cap and graphics quality) and the allowlisted rendering flags in the version folder's `ClientSettings\ClientAppSettings.json`. Both are put back as they were once the client has read them.
-- **Never** sends telemetry. There is no RoALT server and no RoALT account.
+- **Never** sends telemetry. The account manager needs no account and no server: only the Ethos layer, once you sign in, talks to the Ethos backend.
 - **Never** writes cookies, tickets or launch arguments to its logs.
 - **Never** changes Windows settings, except the opt-in bandwidth limit.
-- **Never** contacts Discord's servers unless you paste a webhook. Rich presence goes only to the Discord app on your PC.
+- **Never** contacts Discord's servers unless you paste a webhook.
 
 </td>
 </tr>
@@ -369,43 +369,41 @@ In **Settings → Launching**, turn on **Auto-rejoin** (and, if you like, **Auto
 <summary><b>The details</b></summary>
 <br>
 
-- **Discord rich presence (on by default).** RoALT tells the Discord app on this PC, over its local pipe, the game's
-  name and how many clients run. Discord shows that on your profile. Turn it off under **Settings → Show on Discord**.
 - **Discord alerts (opt-in).** If you paste a webhook in the Discord tab, alerts go to that webhook on `discord.com`. The URL is
   kept encrypted in the vault, and messages name accounts by display name and username only, with mentions disabled.
   Nothing is sent while the vault is locked.
 - **Roblox updates** come from Roblox only: the version from `clientsettingscdn.roblox.com`, the installer from
   `setup.rbxcdn.com`, run only when its signature checks out as Roblox Corporation's.
-- **RoALT updates** are looked up on GitHub (`api.github.com`, this repository's latest published release) as soon
-  as RoALT starts and every 6 hours, unless you turn *Check for RoALT updates* off in Settings. The request carries only
-  `RoALT/<version>` as its user agent. When you click Update now, the installer and its `.sig` are downloaded from
+- **Ethos Manager updates** are looked up on GitHub (`api.github.com`, this repository's latest published release) as soon
+  as Ethos Manager starts and every 6 hours, unless you turn *Check for Ethos Manager updates* off in Settings. The request carries only
+  `EthosManager/<version>` as its user agent. When you click Update now, the installer and its `.sig` are downloaded from
   `github.com` (GitHub's own download hosts only), and the installer runs only if its ECDSA P-256 signature checks out
-  against the public key built into RoALT. The signature covers the version too, so the release must be newer than
-  the RoALT you run and the installer must be the one signed for that version. It installs silently, and RoALT starts again.
-  Roblox clients keep running through it, and the restarted RoALT follows them again (also after you close and reopen
-  RoALT). Their limits are lifted while RoALT is closed and set again when it starts.
-- **Multi-instance** works by creating one named Windows object before Roblox starts. RoALT also holds Roblox's shared
+  against the public key built into Ethos Manager. The signature covers the version too, so the release must be newer than
+  the Ethos Manager you run and the installer must be the one signed for that version. It installs silently, and Ethos Manager starts again.
+  Roblox clients keep running through it, and the restarted Ethos Manager follows them again (also after you close and reopen
+  Ethos Manager). Their limits are lifted while Ethos Manager is closed and set again when it starts.
+- **Multi-instance** works by creating one named Windows object before Roblox starts. Ethos Manager also holds Roblox's shared
   sign-in files while its clients run, so clients can't sign each other out.
-- **Limits** go through Windows itself (job objects, priority, affinity). RoALT only ever opens a client with the
+- **Limits** go through Windows itself (job objects, priority, affinity). Ethos Manager only ever opens a client with the
   narrow rights a change needs, never to read its memory.
-- **Take over (on request)** closes the one "Roblox is already running" lock inside an open Roblox, so RoALT's clients
+- **Take over (on request)** closes the one "Roblox is already running" lock inside an open Roblox, so Ethos Manager's clients
   can run next to it. It needs to copy that one handle (`PROCESS_DUP_HANDLE`) and never reads or writes the client's memory.
 - **Anti-AFK (opt-in)** briefly brings a client to the front and presses F13 the way a keyboard does.
 - **Window tools** (previews, hide, micro, tile) use ordinary Windows calls: Windows.Graphics.Capture for previews, and
   `ShowWindow`, `SetWindowPos`, `SetWindowLongPtr` and `SetLayeredWindowAttributes` for the rest. A hidden client gets the
-  layered and click-through window styles at alpha 1. Clean exit and panics clear them; if RoALT is killed outright, the
-  client stays invisible until RoALT starts again.
+  layered and click-through window styles at alpha 1. Clean exit and panics clear them; if Ethos Manager is killed outright, the
+  client stays invisible until Ethos Manager starts again.
 - **Free resizing and hidden clients** use a low-level mouse hook and window-event hooks (foreground, Alt-Tab, minimize,
-  drags) in RoALT's own process. They see where the mouse is and which window changes across the PC, and store and send
-  nothing. A press only acts on the edge or title bar of a client RoALT started; a press on the taskbar or its thumbnails
+  drags) in Ethos Manager's own process. They see where the mouse is and which window changes across the PC, and store and send
+  nothing. A press only acts on the edge or title bar of a client Ethos Manager started; a press on the taskbar or its thumbnails
   is only noted, for a moment, as you asking for a hidden client back.
-- **Bandwidth limit (opt-in)** adds a Windows QoS policy named `RoALT-Roblox` through an admin prompt, only when you click
-  Apply. Windows drops it on restart. It is the only change RoALT makes to Windows.
+- **Bandwidth limit (opt-in)** adds a Windows QoS policy named `EthosManager-Roblox` through an admin prompt, only when you click
+  Apply. Windows drops it on restart. It is the only change Ethos Manager makes to Windows.
 
 </details>
 
 > [!IMPORTANT]
-> Your `.ROBLOSECURITY` cookie is the key to your account. RoALT keeps it encrypted, but never share a cookie,
+> Your `.ROBLOSECURITY` cookie is the key to your account. Ethos Manager keeps it encrypted, but never share a cookie,
 > a `.roalt` backup or its password with anyone, including people who say they are helping you.
 
 <br>
@@ -413,12 +411,12 @@ In **Settings → Launching**, turn on **Auto-rejoin** (and, if you like, **Auto
 ## ❓ FAQ
 
 <details>
-<summary><b>Is RoALT safe to use with my account?</b></summary>
+<summary><b>Is Ethos Manager safe to use with my account?</b></summary>
 <br>
 
-RoALT signs in the same way the Roblox website does and never touches the Roblox client. Roblox has said that
+Ethos Manager signs in the same way the Roblox website does and never touches the Roblox client. Roblox has said that
 multi-instance methods which don't modify the client are not affected by its modified-client enforcement, but it
-doesn't officially support running several clients at once. Use RoALT only with accounts you own.
+doesn't officially support running several clients at once. Use Ethos Manager only with accounts you own.
 
 </details>
 
@@ -435,8 +433,8 @@ The installer isn't code-signed yet, so SmartScreen doesn't recognise it. Check 
 <summary><b>Multi-instance says Roblox is already running.</b></summary>
 <br>
 
-Roblox's tray app or an open client already holds the lock RoALT needs. Click **Close Roblox** when RoALT offers it, then
-launch from RoALT. To keep that client open, click **Take over** instead.
+Roblox's tray app or an open client already holds the lock Ethos Manager needs. Click **Close Roblox** when Ethos Manager offers it, then
+launch from Ethos Manager. To keep that client open, click **Take over** instead.
 
 </details>
 
@@ -462,7 +460,7 @@ password. The code works once and you get a new one. It's optional: make one whe
   `.roalt` backup does.
 
 Without a code the password can't be recovered: that is what makes it safe. Remove the data folder
-(`%LOCALAPPDATA%\RoALT`) and add your accounts again, or import a `.roalt` backup whose password you know.
+(`%LOCALAPPDATA%\EthosManager`) and add your accounts again, or import a `.roalt` backup whose password you know.
 
 </details>
 
@@ -470,8 +468,8 @@ Without a code the password can't be recovered: that is what makes it safe. Remo
 <summary><b>Does it work with Bloxstrap?</b></summary>
 <br>
 
-Yes. RoALT launches through the registered bootstrapper and follows its clients. It won't install Roblox updates over a
-bootstrapper, since the bootstrapper keeps Roblox up to date itself. RoALT's graphics flags are skipped there, because a
+Yes. Ethos Manager launches through the registered bootstrapper and follows its clients. It won't install Roblox updates over a
+bootstrapper, since the bootstrapper keeps Roblox up to date itself. Ethos Manager's graphics flags are skipped there, because a
 bootstrapper writes its own.
 
 </details>
@@ -480,7 +478,7 @@ bootstrapper writes its own.
 <summary><b>Where is my data? Can I move it?</b></summary>
 <br>
 
-In `%LOCALAPPDATA%\RoALT`. **Settings → Data** opens it or moves it to another folder or drive.
+In `%LOCALAPPDATA%\EthosManager`. **Settings → Data** opens it or moves it to another folder or drive.
 
 </details>
 
@@ -488,8 +486,7 @@ In `%LOCALAPPDATA%\RoALT`. **Settings → Data** opens it or moves it to another
 
 ## 💬 Community
 
-Questions, ideas or bug reports? Join the **[Discord server](https://discord.gg/qcj68tHKCX)** or
-[open an issue](https://github.com/inspectsoftware/RoALT/issues).
+Questions, ideas or bug reports? [Open an issue](https://github.com/jashxn/ethos-manager/issues).
 
 <br>
 
@@ -503,7 +500,7 @@ Questions, ideas or bug reports? Join the **[Discord server](https://discord.gg/
 
 ## 🧭 Architecture
 
-RoALT is a [Tauri 2](https://tauri.app) app: a Rust backend that owns every secret, process and network call, and a
+Ethos Manager is a [Tauri 2](https://tauri.app) app: a Rust backend that owns every secret, process and network call, and a
 React UI that talks to it over typed IPC. The UI never sees a cookie unless you reveal one.
 
 ```mermaid
@@ -514,7 +511,7 @@ flowchart LR
     CMD --> LAUNCH["launcher<br/>target · uri · bulk · update"]
     CMD --> INST["instances<br/>tracker · limits · rejoin · metrics"]
     CMD --> DISC["discord<br/>webhook alerts"]
-    VAULT --> DB[("SQLite<br/>roalt.db")]
+    VAULT --> DB[("SQLite<br/>ethos-manager.db")]
     LAUNCH --> API
     LAUNCH --> RBX["RobloxPlayerBeta.exe"]
     INST -- "PID + log file" --> RBX
@@ -577,27 +574,40 @@ What each milestone added and how to test it is in [docs/MILESTONES.md](docs/MIL
 
 ## 🔨 Build from source
 
-**Needs:** Node.js 24, Rust (stable, with the Visual Studio Build Tools' C++ workload) and, for the installer,
-[Inno Setup 6.6 or newer](https://jrsoftware.org/isdl.php).
+**Needs**, all on Windows 10 or 11 x64:
+
+| Tool | Install |
+|---|---|
+| Rust 1.95 or newer, through rustup | `winget install Rustlang.Rustup`, then `rustup default stable` |
+| Visual Studio Build Tools with the C++ workload | `winget install Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"` |
+| Node.js 24 | [nodejs.org](https://nodejs.org) |
+| Strawberry Perl (OpenSSL for the encrypted database builds from source with it) | `winget install StrawberryPerl.StrawberryPerl` |
+| Inno Setup 6.6 or newer, for the installer | `winget install JRSoftware.InnoSetup` |
+
+Open a new terminal after installing them, then build the installer from a clean clone:
 
 ```powershell
-git clone https://github.com/inspectsoftware/RoALT.git
-cd RoALT
+git clone https://github.com/jashxn/ethos-manager.git
+cd ethos-manager
 npm ci
-npm run tauri dev        # run the app with hot reload
+powershell -ExecutionPolicy Bypass -File scripts\build-installer.ps1
 ```
+
+That writes `dist-installer\EthosManager-Setup-<version>.exe` and prints its SHA-256.
 
 | Command | What it does |
 |---|---|
-| `npm run tauri dev` | Runs the full app. |
+| `npm run tauri dev` | Runs the full app with hot reload. |
 | `npm run dev` | Runs the UI alone in a browser, against a built-in mock of the backend (`src/dev/mockIpc.ts`). |
-| `npm run build` | Type-checks and builds the UI into `dist/`. |
+| `npm run build` | Type-checks, checks every translation, and builds the UI into `dist/`. |
 | `npm run bindings` | Regenerates the TypeScript types in `src/bindings/` from the Rust types. Run it after changing a `#[ts(export)]` type. |
-| `powershell -ExecutionPolicy Bypass -File scripts\build-installer.ps1` | Release build plus installer: `dist-installer\RoALT-Setup-<version>.exe` and its SHA-256. |
-| `…\build-installer.ps1 -Dev` | Also keeps `installers\RoALT-Setup-<version>-dev-<stamp>.exe`, one per change. |
+| `powershell -ExecutionPolicy Bypass -File scripts\build-installer.ps1` | Release build plus installer: `dist-installer\EthosManager-Setup-<version>.exe` and its SHA-256. |
+| `…\build-installer.ps1 -Dev` | Also keeps `installers\EthosManager-Setup-<version>-dev-<stamp>.exe`, one per change. |
 
 > [!TIP]
-> Set `ROALT_DATA_DIR` to a scratch folder to run a build without touching your real accounts.
+> Set `ETHOS_MANAGER_DATA_DIR` to a scratch folder to run a build without touching your real accounts. A build
+> started that way skips the single-instance check, so it runs beside your normal Ethos Manager, and two of them
+> on different folders run side by side.
 
 <br>
 
@@ -618,10 +628,10 @@ npm run tauri dev        # run the app with hot reload
 │  │  ├─ model.rs          shared types (exported to TS)
 │  │  ├─ vault/  roblox_api/  launcher/  instances/  storage/
 │  │  ├─ discord.rs  webview.rs  tray.rs  error.rs
-│  ├─ tests/fixtures/      recorded Roblox responses (no real cookies)
+│  ├─ locales/             the backend's translations
 │  └─ tauri.conf.json
-├─ installer/RoALT.iss     Inno Setup script
-├─ scripts/                build-installer.ps1
+├─ installer/EthosManager.iss  Inno Setup script
+├─ scripts/                build-installer.ps1, check-i18n.mjs
 ├─ docs/                   DESIGN.md · MILESTONES.md · research/
 └─ .github/workflows/      ci.yml · release.yml
 ```
@@ -631,15 +641,34 @@ npm run tauri dev        # run the app with hot reload
 ## 🧪 Testing
 
 ```powershell
-npm run typecheck                              # TypeScript
-cd src-tauri
-cargo test --locked                            # Rust unit tests
-cargo clippy --all-targets --locked -- -D warnings
+npm ci
+npm run build                                                     # TypeScript, translations, and dist/ for the Rust build
+cargo test --locked --manifest-path src-tauri/Cargo.toml          # Rust unit tests
+cargo clippy --all-targets --locked --manifest-path src-tauri/Cargo.toml -- -D warnings
 ```
 
-The Rust tests cover link parsing, URI building (byte-for-byte against the website's output), vault and backup
-round-trips, and response parsing from recorded fixtures. They never use real cookies. CI runs all of the above on
-`windows-latest` for every push and pull request.
+`cargo test` needs `dist/`, so run `npm run build` first. The Rust tests cover link parsing, URI building
+(byte-for-byte against the website's output), vault and backup round-trips, the self-updater's signature check, and
+response parsing from recorded fixtures. They never use real cookies. CI runs all of the above on `windows-latest`
+for every push and pull request.
+
+<br>
+
+## 🔀 Upstream
+
+Ethos Manager is a GitHub fork of [inspectsoftware/RoALT](https://github.com/inspectsoftware/RoALT) and keeps pulling
+it:
+
+```powershell
+git remote add upstream https://github.com/inspectsoftware/RoALT.git
+git fetch upstream
+git merge upstream/main
+```
+
+To keep those merges clean, Ethos code lives in its own folders, `src-tauri/src/ethos/` and `src/features/ethos/`,
+and RoALT's files change only where Ethos Manager needs a hook. File formats and hidden names keep RoALT's spelling
+on purpose, so RoALT's files still import and merges stay small: encryption labels, the `.roalt` backup, the
+`roalt-performance` profile and its `RoALT-PERF:` share code, and `localStorage` keys.
 
 <br>
 
@@ -647,10 +676,11 @@ round-trips, and response parsing from recorded fixtures. They never use real co
 
 Bug reports, ideas and pull requests are welcome.
 
-1. Open an [issue](https://github.com/inspectsoftware/RoALT/issues) or ask on [Discord](https://discord.gg/qcj68tHKCX) first for anything big.
+1. Open an [issue](https://github.com/jashxn/ethos-manager/issues) first for anything big. A fix for something RoALT
+   does too belongs [upstream](https://github.com/inspectsoftware/RoALT/issues).
 2. Keep changes small and focused, and match the surrounding code.
 3. Run the [tests](#-testing) and `npm run bindings` if you changed a shared type.
-4. Never commit a real cookie, ticket or webhook, including in fixtures or screenshots.
+4. Never commit a real cookie, ticket, key or webhook, including in fixtures or screenshots.
 
 <br>
 
@@ -661,10 +691,10 @@ Bug reports, ideas and pull requests are welcome.
 <br>
 
 1. Set the same version in `src-tauri/tauri.conf.json`, `package.json` and `src-tauri/Cargo.toml`,
-   then run `cargo update -p roalt --offline` in `src-tauri` so `Cargo.lock` matches (CI builds `--locked`).
+   then run `cargo update -p ethos-manager --offline` in `src-tauri` so `Cargo.lock` matches (CI builds `--locked`).
 2. Commit all four files, then tag and push the tag: `git tag vX.Y.Z && git push origin vX.Y.Z`.
-3. The Release workflow builds the installer and puts it with `SHA256SUMS.txt` on a draft release.
-   Check it, then publish the draft.
+3. The Release workflow builds the installer, signs it for the self-updater with the `ETHOS_UPDATE_KEY` secret, and
+   puts it with its `.sig` and `SHA256SUMS.txt` on a draft release. Check it, then publish the draft.
 
 </details>
 
@@ -672,17 +702,18 @@ Bug reports, ideas and pull requests are welcome.
 
 ## ⚖️ License
 
-[MIT](LICENSE).
+[MIT](LICENSE). Ethos Manager is based on [RoALT](https://github.com/inspectsoftware/RoALT), © 2026 inspectsoftware,
+whose MIT notice `LICENSE` keeps and Settings › About shows.
 
 <br>
 
 ## 📜 Disclaimer
 
-RoALT is an independent project, not affiliated with or endorsed by Roblox Corporation. Use it only
-with accounts you own. Roblox doesn't officially support running several clients at once and may
-change how its client behaves at any time.
+Ethos Manager is an independent project, not affiliated with or endorsed by Roblox Corporation or by RoALT's
+author. Use it only with accounts you own. Roblox doesn't officially support running several clients at once and
+may change how its client behaves at any time.
 
 <div align="center">
 <br>
-<sub>Made for people with too many alts. &nbsp;·&nbsp; <a href="https://discord.gg/qcj68tHKCX">Discord</a> &nbsp;·&nbsp; <a href="https://github.com/inspectsoftware/RoALT/releases/latest">Download</a></sub>
+<sub>Made for people with too many alts. &nbsp;·&nbsp; <a href="https://github.com/jashxn/ethos-manager/releases/latest">Download</a> &nbsp;·&nbsp; <a href="https://github.com/inspectsoftware/RoALT">RoALT</a></sub>
 </div>
