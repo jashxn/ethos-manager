@@ -65,18 +65,13 @@ export function Icon({ name, size = 16, fill = false, className }: { name: IconN
   );
 }
 
-/** The RoALT mark: a lime square under an outlined one. */
+export const ETHOS_MARK =
+  "M0.41 53A60 60 0 0 1 119.59 53Z M0.41 67A60 60 0 0 0 102.43 102.43L85.46 85.46A36 36 0 0 1 24.69 67Z";
+
 export function Logo() {
   return (
-    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true">
-      <rect x="1" y="1" width="9" height="9" rx="1" fill="var(--accent)" />
-      {/* The app icon's tilted tile with a hole (src-tauri/icons/app-icon.svg). */}
-      <mask id="logo-hole">
-        <rect width="18" height="18" fill="#fff" />
-        {/* In the tile's own (rotated) space. */}
-        <rect x="10.3" y="10.3" width="2.4" height="2.4" rx="0.4" fill="#000" />
-      </mask>
-      <rect transform="rotate(15 11.5 11.5)" x="7.5" y="7.5" width="8" height="8" rx="1" fill="currentColor" mask="url(#logo-hole)" />
+    <svg width="18" height="18" viewBox="0 0 120 120" aria-hidden="true">
+      <path fill="currentColor" d={ETHOS_MARK} />
     </svg>
   );
 }

@@ -24,17 +24,6 @@
 }
 .splash .logo { position: relative; width: 120px; height: 120px; }
 .splash .logo svg { position: absolute; inset: 0; }
-.splash .cube {
-  position: absolute;
-  left: 6.7px;
-  top: 6.7px;
-  width: 60px;
-  height: 60px;
-  border-radius: 6.7px;
-  background: #c6f432;
-  animation-name: splash-cube;
-  animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
-}
 .splash .tile { position: absolute; inset: 0; animation-name: splash-tile; }
 .splash .red, .splash .cyan, .splash .core { mix-blend-mode: screen; }
 .splash .red { animation-name: splash-red; }
@@ -61,14 +50,13 @@
 }
 
 @keyframes splash-tile {
-  0%, 45% { transform: translate(-16.7px, -16.7px); }
-  45.5%, 47% { transform: translate(-13px, -20px); }
-  47.5%, 49% { transform: translate(-22px, -15px); }
-  49.5%, 51% { transform: translate(-15px, -17px); }
-  51.5%, 53% { transform: translate(-19px, -18px); }
-  53.5%, 64.4% { transform: translate(-16.7px, -16.7px); }
-  /* The teleport: paired stops snap instead of sliding. */
-  64.5%, 65.4% { transform: translate(-19px, -14px); }
+  0%, 45% { transform: translate(0, 0); }
+  45.5%, 47% { transform: translate(3.7px, -3.3px); }
+  47.5%, 49% { transform: translate(-5.3px, 1.7px); }
+  49.5%, 51% { transform: translate(1.7px, -0.3px); }
+  51.5%, 53% { transform: translate(-2.3px, -1.3px); }
+  53.5%, 64.4% { transform: translate(0, 0); }
+  64.5%, 65.4% { transform: translate(-2.3px, 2.7px); }
   65.5%, 66.4% { transform: translate(2px, -2px); }
   66.5%, 67.4% { transform: translate(-1px, 1px); }
   67.5%, 100% { transform: translate(0, 0); }
@@ -137,14 +125,6 @@
   48.5%, 50% { opacity: 0; }
   50.5%, 52.5% { opacity: 1; transform: translateX(14px); }
   53%, 100% { opacity: 0; transform: translateX(0); }
-}
-@keyframes splash-cube {
-  0%, 54% { opacity: 0; transform: scale(0.4); box-shadow: 0 0 0 rgb(198 244 50 / 0); }
-  55% { opacity: 1; transform: scale(1.18); box-shadow: 0 0 40px rgb(198 244 50 / 0.9); }
-  56% { opacity: 0.2; }
-  57% { opacity: 1; transform: scale(1.1); }
-  61% { transform: scale(1); box-shadow: 0 0 28px rgb(198 244 50 / 0.55); }
-  100% { opacity: 1; transform: scale(1); box-shadow: 0 0 14px rgb(198 244 50 / 0.3); }
 }
 @keyframes splash-word {
   0%, 68% { opacity: 0; transform: translateY(8px); letter-spacing: 0.3em; }
