@@ -9,6 +9,7 @@ on:
 
 jobs:
   publish:
+    if: github.repository == 'inspectsoftware/RoALT'
     runs-on: windows-latest
     env:
       HAS_TOKEN: ${{ secrets.WINGET_TOKEN != '' }}
