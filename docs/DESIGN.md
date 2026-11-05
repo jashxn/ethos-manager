@@ -96,7 +96,7 @@ QuikSwitch/                      repo root (product name RoALT)
 │     └─ storage/
 │        ├─ mod.rs               one Mutex<Connection>, used via spawn_blocking
 │        └─ migrations/001_init.sql
-├─ installer/RoALT.iss           Inno Setup script
+├─ installer/EthosManager.iss    Inno Setup script
 ├─ scripts/build-installer.ps1
 ├─ .github/workflows/ci.yml  release.yml
 └─ docs/DESIGN.md  docs/research/
@@ -106,10 +106,10 @@ QuikSwitch/                      repo root (product name RoALT)
 
 ### Files on disk
 
-Default data folder `%LOCALAPPDATA%\RoALT` (DPAPI keys are per machine and user, so Local, not Roaming):
-`roalt.db`, `logs\`, `webview\` (UI only, never used for roblox.com), `tmp-webview\<uuid>\` (login and
+Default data folder `%LOCALAPPDATA%\EthosManager` (DPAPI keys are per machine and user, so Local, not Roaming):
+`ethos-manager.db`, `logs\`, `webview\` (UI only, never used for roblox.com), `tmp-webview\<uuid>\` (login and
 session windows, deleted after use, swept on start). A moved data folder is recorded in
-`%LOCALAPPDATA%\RoALT\location.json`. `ROALT_DATA_DIR` overrides everything, for test runs on a hidden desktop.
+`%LOCALAPPDATA%\EthosManager\location.json`. `ETHOS_MANAGER_DATA_DIR` overrides everything, for test runs on a hidden desktop.
 
 ### Vault (envelope encryption)
 
@@ -383,21 +383,22 @@ doesn't retry a version that failed. Fallback: open roblox.com/download.
 
 ## 7. Releases
 
-- `installer/RoALT.iss`: per-user install (no admin), `{localappdata}\Programs\RoALT`, Windows 11 wizard
+- `installer/EthosManager.iss`: per-user install (no admin), `{localappdata}\Programs\Ethos Manager`, Windows 11 wizard
   style in dark and light, desktop/start-menu icons, offers Microsoft's WebView2 download if the runtime is missing (the app explains it on start too).
   Uninstall keeps your accounts unless you tick "also delete my data".
 - `scripts/build-installer.ps1`: builds the app (`tauri build --no-bundle`, static CRT) and runs ISCC with
-  the version from `tauri.conf.json`, output `dist\RoALT-Setup-<version>.exe`.
-- `.github/workflows/release.yml` (same pattern as AgentSuite): a `v*` tag builds on windows-latest,
-  installs Inno Setup, signs `RoALT-Setup-<version>.exe` + newline + the setup .exe's bytes with the
-  `ROALT_UPDATE_KEY` secret (ECDSA P-256 / SHA-256, IEEE P1363, base64 in `RoALT-Setup-<version>.exe.sig`;
+  the version from `tauri.conf.json`, output `dist-installer\EthosManager-Setup-<version>.exe`.
+- `.github/workflows/release.yml` (same pattern as AgentSuite): an `em-v*` tag (RoALT's own `v*` tags
+  came with the fork) builds on windows-latest,
+  installs Inno Setup, signs `EthosManager-Setup-<version>.exe` + newline + the setup .exe's bytes with the
+  `ETHOS_UPDATE_KEY` secret (ECDSA P-256 / SHA-256, IEEE P1363, base64 in `EthosManager-Setup-<version>.exe.sig`;
   the job fails without the secret, or when the signature doesn't verify against `PUBLIC_KEY` in
   `self_update.rs`), attaches both and
   `SHA256SUMS.txt` to a **draft** release; you publish it.
   `ci.yml` runs `cargo test`, clippy and `tsc` on every push.
 - No Authenticode signing yet: SmartScreen will warn on first run.
 - Self-update (`self_update.rs`, setting `selfUpdate`, default on): `api.github.com/.../releases/latest`
-  (published, non-draft, non-prerelease) at start and every 6 h; a strictly newer `vX.Y.Z` tag with
+  (published, non-draft, non-prerelease) at start and every 6 h; a strictly newer `em-vX.Y.Z` tag (plain `v` tags are ignored) with
   both assets is offered in a banner (Later hides it until the next start) and by Settings → Check now.
   Turning the switch off forgets the found version (the banner hides); on checks at once.
   Update now (asks first while tracked clients run: they keep running and are followed again after the restart) asks
@@ -405,7 +406,7 @@ doesn't retry a version that failed. Fallback: open roblox.com/download.
   into a fresh temp folder, write-locks the file, verifies the release's name line + the bytes read back
   through that handle with CNG against the embedded public key (so an older signed installer can't pose
   as a newer version), checks again that no launch, batch, rejoin or Roblox install started, runs it `/VERYSILENT /SUPPRESSMSGBOXES /NORESTART
-  /CLOSEAPPLICATIONS /RELAUNCH` and quits; RoALT.iss starts RoALT again on `/RELAUNCH`. The next start
+  /CLOSEAPPLICATIONS /RELAUNCH` and quits; EthosManager.iss starts Ethos Manager again on `/RELAUNCH`. The next start
   deletes the folder.
 
 ## 8. Milestones

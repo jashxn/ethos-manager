@@ -4,7 +4,7 @@
 
 ### Every Roblox account you own, signed in, checked and one click from any game.
 
-An open-source account manager and multi-client launcher for Windows, with the Ethos layer on top.<br>
+An open-source account manager and multi-client launcher for Windows, with an Ethos layer planned on top.<br>
 Your cookies stay encrypted on your PC and go only to Roblox.
 
 [![Latest release](https://img.shields.io/github/v/release/jashxn/ethos-manager?style=for-the-badge&color=b4f000&labelColor=1a1a1a&label=release)](https://github.com/jashxn/ethos-manager/releases/latest)
@@ -54,9 +54,10 @@ Ethos Manager is a Windows app for people who play Roblox on more than one accou
 - **Everything RoALT does, free and without an account.** Add each account once through Roblox's own sign-in
   page, see them all at a glance, paste any game link and launch one account or ten, run several clients side by
   side, and let Ethos Manager bring back any that crash or get kicked.
-- **The Ethos layer, with an Ethos account.** Signing in with Discord, backed by a paid or trial Ethos key, unlocks
-  the parts that talk to the Ethos backend: license tools, cloud configs, add-ons, the live mirror of the Ethos
-  window, stats and multi-PC. Without signing in, none of that runs and nothing goes to the Ethos backend.
+- **The Ethos layer, with an Ethos account (planned, not built yet).** Signing in with Discord, backed by a paid
+  or trial Ethos key, will unlock the parts that talk to the Ethos backend: license tools, cloud configs, add-ons,
+  the live mirror of the Ethos window, stats and multi-PC. Without signing in, none of that will run and nothing
+  will go to the Ethos backend.
 
 Cookies go only to Roblox, signed in or not.
 
@@ -342,7 +343,7 @@ In **Settings → Launching**, turn on **Auto-rejoin** (and, if you like, **Auto
 
 #### ✅ What Ethos Manager does
 
-- Talks **only** to `*.roblox.com` and `*.rbxcdn.com`, plus GitHub to look for Ethos Manager updates (can be turned off), your Discord webhook, and the Ethos backend once you sign in to the Ethos layer.
+- Talks **only** to `*.roblox.com` and `*.rbxcdn.com`, plus GitHub to look for Ethos Manager updates (can be turned off), and your Discord webhook. The planned Ethos layer will add the Ethos backend, only once you sign in.
 - Encrypts every cookie with **AES-256-GCM** under a key protected by **Windows DPAPI**, plus your master password if you set one.
 - Encrypts the **whole database** too (SQLCipher, AES-256), with its own DPAPI-protected key: a copied `ethos-manager.db` can't be read on another PC or Windows account.
 - Signs you in through **Roblox's own page**, in a throw-away browser profile.
@@ -356,7 +357,7 @@ In **Settings → Launching**, turn on **Auto-rejoin** (and, if you like, **Auto
 #### 🚫 What Ethos Manager never does
 
 - **Never** reads or writes the Roblox client's memory or files, with two exceptions for the clients it starts: Roblox's own settings file (`GlobalBasicSettings_13.xml`, only the frame-rate cap and graphics quality) and the allowlisted rendering flags in the version folder's `ClientSettings\ClientAppSettings.json`. Both are put back as they were once the client has read them.
-- **Never** sends telemetry. The account manager needs no account and no server: only the Ethos layer, once you sign in, talks to the Ethos backend.
+- **Never** sends telemetry. The account manager needs no account and no server: only the planned Ethos layer, once you sign in, will talk to the Ethos backend.
 - **Never** writes cookies, tickets or launch arguments to its logs.
 - **Never** changes Windows settings, except the opt-in bandwidth limit.
 - **Never** contacts Discord's servers unless you paste a webhook.
@@ -604,11 +605,6 @@ That writes `dist-installer\EthosManager-Setup-<version>.exe` and prints its SHA
 | `powershell -ExecutionPolicy Bypass -File scripts\build-installer.ps1` | Release build plus installer: `dist-installer\EthosManager-Setup-<version>.exe` and its SHA-256. |
 | `…\build-installer.ps1 -Dev` | Also keeps `installers\EthosManager-Setup-<version>-dev-<stamp>.exe`, one per change. |
 
-> [!TIP]
-> Set `ETHOS_MANAGER_DATA_DIR` to a scratch folder to run a build without touching your real accounts. A build
-> started that way skips the single-instance check, so it runs beside your normal Ethos Manager, and two of them
-> on different folders run side by side.
-
 <br>
 
 ## 📁 Project layout
@@ -650,7 +646,16 @@ cargo clippy --all-targets --locked --manifest-path src-tauri/Cargo.toml -- -D w
 `cargo test` needs `dist/`, so run `npm run build` first. The Rust tests cover link parsing, URI building
 (byte-for-byte against the website's output), vault and backup round-trips, the self-updater's signature check, and
 response parsing from recorded fixtures. They never use real cookies. CI runs all of the above on `windows-latest`
-for every push and pull request.
+for every push and pull request. GitHub turns Actions off on a fork: enable them in the fork's **Actions** tab, or
+neither CI nor the Release workflow runs.
+
+> [!NOTE]
+> To test a build without touching your real accounts, set `ETHOS_MANAGER_DATA_DIR` to a scratch folder. A build
+> started that way skips the single-instance check, so it runs beside your normal Ethos Manager, and two of them on
+> different folders run side by side. They still share what lives outside the data folder: Roblox's global client
+> settings (`GlobalBasicSettings_13.xml` and `ClientAppSettings.json`), the window recover at start (a starting one brings
+> back clients the other hid or parked off-screen), the `EthosManager-Roblox` QoS policy name, the panic hotkey (only
+> the first one gets it) and Roblox's multi-instance singleton.
 
 <br>
 
@@ -661,14 +666,18 @@ it:
 
 ```powershell
 git remote add upstream https://github.com/inspectsoftware/RoALT.git
-git fetch upstream
+git config remote.upstream.tagOpt --no-tags
+git fetch upstream --no-tags
 git merge upstream/main
 ```
 
-To keep those merges clean, Ethos code lives in its own folders, `src-tauri/src/ethos/` and `src/features/ethos/`,
-and RoALT's files change only where Ethos Manager needs a hook. File formats and hidden names keep RoALT's spelling
-on purpose, so RoALT's files still import and merges stay small: encryption labels, the `.roalt` backup, the
-`roalt-performance` profile and its `RoALT-PERF:` share code, and `localStorage` keys.
+Fetch with `--no-tags`: RoALT's `v*` release tags would otherwise land next to Ethos Manager's `em-v*` ones.
+
+To keep those merges clean, the planned Ethos code will live in its own folders, `src-tauri/src/ethos/` and
+`src/features/ethos/` (neither exists yet), and RoALT's files change only where Ethos Manager needs a hook. File
+formats and hidden names keep RoALT's spelling on purpose, so RoALT's files still import and merges stay small:
+encryption labels, the `.roalt` backup, the `roalt-performance` profile and its `RoALT-PERF:` share code, and
+`localStorage` keys.
 
 <br>
 
@@ -692,7 +701,9 @@ Bug reports, ideas and pull requests are welcome.
 
 1. Set the same version in `src-tauri/tauri.conf.json`, `package.json` and `src-tauri/Cargo.toml`,
    then run `cargo update -p ethos-manager --offline` in `src-tauri` so `Cargo.lock` matches (CI builds `--locked`).
-2. Commit all four files, then tag and push the tag: `git tag vX.Y.Z && git push origin vX.Y.Z`.
+2. Commit all four files, then tag and push the tag: `git tag em-vX.Y.Z && git push origin em-vX.Y.Z`. The `em-`
+   prefix keeps clear of RoALT's `v0.1.0`…`v0.9.2` tags, which came with the fork. The Release workflow refuses a
+   tag that isn't `em-v` plus that version, and the self-updater ignores plain `v` tags.
 3. The Release workflow builds the installer, signs it for the self-updater with the `ETHOS_UPDATE_KEY` secret, and
    puts it with its `.sig` and `SHA256SUMS.txt` on a draft release. Check it, then publish the draft.
 

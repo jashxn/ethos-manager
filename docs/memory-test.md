@@ -29,7 +29,7 @@ For each state, take these from RoALT's Monitor tab or Task Manager's Details ta
 States 1 to 3 need a relaunch after each settings change. Graphics are only read at launch.
 
 ## Trim
-RoALT logs each trim in `roalt.log`:
+RoALT logs each trim in `logs\ethos-manager.log`:
 
 ```text
 trim of client 1234 (by hand): before: working set ... MB, private working set ... MB, commit ... MB; right after: ...
@@ -47,7 +47,7 @@ While the client is limited, also note if it stutters, or if disk use climbs in 
 
 ## What to send back
 - The filled table.
-- The trim lines from `roalt.log`. The diagnostics report includes them.
+- The trim lines from `logs\ethos-manager.log`. The diagnostics report includes them.
 - Whether any client crashed or disconnected during the run.
 
 ## Reading the results
