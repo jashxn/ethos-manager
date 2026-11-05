@@ -378,7 +378,7 @@ local function session()
 	ws.OnMessage:Connect(function(m)
 		if closed then return end
 		if type(m) ~= "string" or #m > MAX or #inbox >= 256 then return close() end
-		table.insert(inbox, m)             -- queue only; never yields in OnMessage
+		table.insert(inbox, m)
 	end)
 	ws.OnClose:Connect(function() closed = true end)
 	local function recv(timeout)
@@ -405,7 +405,7 @@ local function session()
 	close()
 end
 
-task.spawn(function()                      -- wrapped so autoexec is never blocked
+task.spawn(function()
 	if not game:IsLoaded() then game.Loaded:Wait() end
 	while env.__ethosBridgeGen == gen do
 		local started = time()
@@ -413,14 +413,16 @@ task.spawn(function()                      -- wrapped so autoexec is never block
 		if env.__ethosBridgeGen ~= gen then break end
 		local delay = (time() - started > 60) and 2 or math.min((env.__eb_delay or 2) * 2, 60)
 		env.__eb_delay = delay
-		task.wait(delay * (0.8 + math.random() * 0.4))   -- +-20% jitter
+		task.wait(delay * (0.8 + math.random() * 0.4))
 	end
 end)
 ```
 
-`loadstring` runs exactly once, on a `source` whose `Ps` verified. The whole body
-is `task.spawn`ed and waits for `game.Loaded`, so it never blocks other autoexec
-scripts, and `OnMessage` only queues — it never yields **[fix: minimal ran
+`bridge/stub.luau` is this block byte for byte (a Lune test compares them), and
+like all repo code it carries no comments. `loadstring` runs exactly once, on a
+`source` whose `Ps` verified. The whole body is `task.spawn`ed and waits for
+`game.Loaded`, so it never blocks other autoexec scripts; the backoff carries
+±20 % jitter; and `OnMessage` only queues — it never yields **[fix: minimal ran
 `game.Loaded:Wait()`, the reconnect loop and `loadstring` on the autoexec thread
 inside `OnMessage`]**.
 
