@@ -163,6 +163,8 @@
   "settings.importEllipsis": "가져오기…",
   "settings.exportEllipsis": "내보내기…",
   "settings.openReleases": "릴리스 페이지 열기",
+  "settings.basedOn": "Based on RoALT",
+  "settings.basedOnHint": "Ethos Manager is based on RoALT by inspectsoftware, used under the MIT License below.",
   "settings.exported_other": "계정 {count}개를 내보냈어요.",
   "settings.moveText": "Ethos Manager가 데이터베이스를 {path}(으)로 복사하고 다시 시작해서 사용해요. 이전 데이터베이스는 재시작 후 삭제돼요. 로그와 앱의 브라우저 데이터는 이전 폴더에 남아서 테마 등 화면 설정은 초기화돼요.",
   "settings.importAdded": "추가됨",

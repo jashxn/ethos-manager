@@ -165,6 +165,8 @@
   "settings.importEllipsis": "İçe aktar…",
   "settings.exportEllipsis": "Dışa aktar…",
   "settings.openReleases": "Sürümler sayfasını aç",
+  "settings.basedOn": "Based on RoALT",
+  "settings.basedOnHint": "Ethos Manager is based on RoALT by inspectsoftware, used under the MIT License below.",
   "settings.exported_one": "{count} hesap dışa aktarıldı.",
   "settings.exported_other": "{count} hesap dışa aktarıldı.",
   "settings.moveText": "Ethos Manager veritabanını {path} konumuna kopyalar ve onu kullanmak için yeniden başlar. Eski veritabanı yeniden başlatmadan sonra silinir. Günlükler ve uygulamanın tarayıcı verileri eski klasörde kalır; bu yüzden tema ve diğer görünüm tercihleri sıfırlanır.",

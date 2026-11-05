@@ -165,6 +165,8 @@
   "settings.importEllipsis": "Importar…",
   "settings.exportEllipsis": "Exportar…",
   "settings.openReleases": "Abrir página de versões",
+  "settings.basedOn": "Based on RoALT",
+  "settings.basedOnHint": "Ethos Manager is based on RoALT by inspectsoftware, used under the MIT License below.",
   "settings.exported_one": "{count} conta exportada.",
   "settings.exported_other": "{count} contas exportadas.",
   "settings.moveText": "O Ethos Manager copia o banco de dados para {path} e reinicia para usá-lo. O banco antigo é apagado depois de reiniciar. Os logs e os dados de navegador do app ficam na pasta antiga, então o tema e outras preferências de visualização são redefinidos.",

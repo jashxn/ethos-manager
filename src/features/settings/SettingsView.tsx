@@ -322,16 +322,14 @@ export function SettingsView({ vault, settings, onPerformance, onRecoveryCode }:
             <Icon name="external" size={12} />
           </button>
         </Row>
-        <div lang="en" dir="ltr">
-          <Row title="Based on RoALT" hint="Ethos Manager is based on RoALT by inspectsoftware, used under the MIT License below." last>
-            <button className="btn" onClick={() => openUrl(UPSTREAM).catch(toastError)}>
-              github.com/inspectsoftware/RoALT
-              <Icon name="external" size={12} />
-            </button>
-          </Row>
-          <div className="well selectable flex flex-col gap-2 p-4 mb-4 text-[12px] text-dim">
-            {LICENSE_TEXT.map((p) => <p key={p} className="whitespace-pre-line">{p}</p>)}
-          </div>
+        <Row title={t("settings.basedOn")} hint={t("settings.basedOnHint")} last>
+          <button className="btn" onClick={() => openUrl(UPSTREAM).catch(toastError)}>
+            github.com/inspectsoftware/RoALT
+            <Icon name="external" size={12} />
+          </button>
+        </Row>
+        <div lang="en" dir="ltr" className="well selectable flex flex-col gap-2 p-4 mb-4 text-[12px] text-dim">
+          {LICENSE_TEXT.map((p) => <p key={p} className="whitespace-pre-line">{p}</p>)}
         </div>
         </Section>
         </div>

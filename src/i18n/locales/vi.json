@@ -163,6 +163,8 @@
   "settings.importEllipsis": "Nhập…",
   "settings.exportEllipsis": "Xuất…",
   "settings.openReleases": "Mở trang phát hành",
+  "settings.basedOn": "Based on RoALT",
+  "settings.basedOnHint": "Ethos Manager is based on RoALT by inspectsoftware, used under the MIT License below.",
   "settings.exported_other": "Đã xuất {count} tài khoản.",
   "settings.moveText": "Ethos Manager sẽ sao chép cơ sở dữ liệu sang {path} rồi khởi động lại để dùng nó. Cơ sở dữ liệu cũ sẽ bị xóa sau khi khởi động lại. Log và dữ liệu trình duyệt của ứng dụng vẫn ở thư mục cũ, nên giao diện và các tùy chọn hiển thị khác sẽ đặt lại.",
   "settings.importAdded": "đã thêm",

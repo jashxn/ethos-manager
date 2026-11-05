@@ -163,6 +163,8 @@
   "settings.importEllipsis": "インポート…",
   "settings.exportEllipsis": "エクスポート…",
   "settings.openReleases": "リリースページを開く",
+  "settings.basedOn": "Based on RoALT",
+  "settings.basedOnHint": "Ethos Manager is based on RoALT by inspectsoftware, used under the MIT License below.",
   "settings.exported_other": "{count} 件のアカウントをエクスポートしました。",
   "settings.moveText": "Ethos Manager はデータベースを {path} にコピーし、再起動して使用します。古いデータベースは再起動後に削除されます。ログとアプリのブラウザーデータは古いフォルダーに残るため、テーマなどの表示設定はリセットされます。",
   "settings.importAdded": "追加",

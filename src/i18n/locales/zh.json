@@ -163,6 +163,8 @@
   "settings.importEllipsis": "导入…",
   "settings.exportEllipsis": "导出…",
   "settings.openReleases": "打开发布页面",
+  "settings.basedOn": "Based on RoALT",
+  "settings.basedOnHint": "Ethos Manager is based on RoALT by inspectsoftware, used under the MIT License below.",
   "settings.exported_other": "已导出 {count} 个账号。",
   "settings.moveText": "Ethos Manager 会把数据库复制到 {path} 并重启以使用它。旧数据库会在重启后删除。日志和应用的浏览器数据留在旧文件夹，所以主题和其他显示偏好会被重置。",
   "settings.importAdded": "已添加",

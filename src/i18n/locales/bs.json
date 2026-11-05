@@ -167,6 +167,8 @@
   "settings.importEllipsis": "Uvezi…",
   "settings.exportEllipsis": "Izvezi…",
   "settings.openReleases": "Otvori stranicu izdanja",
+  "settings.basedOn": "Based on RoALT",
+  "settings.basedOnHint": "Ethos Manager is based on RoALT by inspectsoftware, used under the MIT License below.",
   "settings.exported_one": "Izvezen {count} račun.",
   "settings.exported_few": "Izvezena {count} računa.",
   "settings.exported_other": "Izvezeno {count} računa.",
