@@ -630,6 +630,42 @@ mod tests {
         assert!(!verify(&other, MESSAGE, &sig), "not a point on the curve");
     }
 
+    const RELEASE_DATA: &[u8] = b"Ethos Manager release key test vector";
+    const RELEASE_SIGNATURE: &str = "hpJSVptNj8ZKsTnbYEpsbWXVBbBA7jIWz1+IoQO3/v6km+yckwKkbJN8NQiFGNjq11surtAJnFXsmSoHHu6jgw==";
+
+    #[test]
+    fn the_release_key_is_accepted_and_tampering_is_not() {
+        let sig = base64(RELEASE_SIGNATURE).unwrap();
+        let message = [signed_prefix("0.1.0"), RELEASE_DATA.to_vec()].concat();
+        assert!(verify(&public_key(), &message, &sig));
+        let mut tampered = message.clone();
+        tampered[40] ^= 1;
+        assert!(!verify(&public_key(), &tampered, &sig), "changed installer");
+        assert!(!verify(&public_key(), &[signed_prefix("0.2.0"), RELEASE_DATA.to_vec()].concat(), &sig), "other version");
+        let mut flipped = sig.clone();
+        flipped[3] ^= 1;
+        assert!(!verify(&public_key(), &message, &flipped), "changed signature");
+        let dir = TempDir::new("roalt-update-release-").unwrap();
+        assert!(write_verified(&dir.0.join("a.exe"), "0.1.0", RELEASE_DATA, &sig, &public_key()).is_ok());
+        assert!(write_verified(&dir.0.join("b.exe"), "0.1.0", b"Ethos Manager release key test vectoR", &sig, &public_key()).is_err());
+    }
+
+    #[test]
+    #[ignore]
+    fn a_downloaded_release_verifies() {
+        let dir = std::path::PathBuf::from(std::env::var("ETHOS_RELEASE_DIR").unwrap());
+        let version = std::env::var("ETHOS_RELEASE_VERSION").unwrap();
+        let name = format!("EthosManager-Setup-{version}.exe");
+        let data = std::fs::read(dir.join(&name)).unwrap();
+        let sig = base64(&std::fs::read_to_string(dir.join(format!("{name}.sig"))).unwrap()).unwrap();
+        let out = TempDir::new("roalt-update-download-").unwrap();
+        assert!(write_verified(&out.0.join("ok.exe"), &version, &data, &sig, &public_key()).is_ok());
+        let mut tampered = data.clone();
+        let mid = tampered.len() / 2;
+        tampered[mid] ^= 1;
+        assert!(write_verified(&out.0.join("bad.exe"), &version, &tampered, &sig, &public_key()).is_err());
+    }
+
     #[test]
     fn the_file_is_checked_as_written_and_stays_locked() {
         let dir = TempDir::new("roalt-update-test-").unwrap();
