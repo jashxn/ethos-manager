@@ -1,12 +1,12 @@
 name: Release
 
-# On a v* tag, or by hand (Actions > Release > Run workflow): builds the installer, signs it for
+# On an em-v* tag, or by hand (Actions > Release > Run workflow): builds the installer, signs it for
 # Ethos Manager's self-updater (EthosManager-Setup-<version>.exe.sig, ECDSA P-256 with the ETHOS_UPDATE_KEY
-# secret), then puts both with their SHA-256 on a draft release v<version>. Nothing is published:
+# secret), then puts both with their SHA-256 on a draft release em-v<version>. Nothing is published:
 # a maintainer reviews the draft and publishes it, which creates the tag when a manual run made it.
 on:
   push:
-    tags: ["v*"]
+    tags: ["em-v*"]
   workflow_dispatch:
 
 permissions:
@@ -33,12 +33,12 @@ jobs:
       - id: v
         run: |
           $version = (Get-Content -Raw src-tauri\tauri.conf.json | ConvertFrom-Json).version
-          if ($env:GITHUB_REF_TYPE -eq 'tag' -and $env:GITHUB_REF_NAME -ne "v$version") {
-            echo "::error::tag $env:GITHUB_REF_NAME is not v$version, the version in src-tauri/tauri.conf.json: tag v$version instead, or set the version in tauri.conf.json, package.json and src-tauri/Cargo.toml first"
+          if ($env:GITHUB_REF_TYPE -eq 'tag' -and $env:GITHUB_REF_NAME -ne "em-v$version") {
+            echo "::error::tag $env:GITHUB_REF_NAME is not em-v$version, the version in src-tauri/tauri.conf.json: tag em-v$version instead, or set the version in tauri.conf.json, package.json and src-tauri/Cargo.toml first"
             exit 1
           }
           "version=$version" >> $env:GITHUB_OUTPUT
-          "tag=v$version" >> $env:GITHUB_OUTPUT
+          "tag=em-v$version" >> $env:GITHUB_OUTPUT
       - uses: actions/setup-node@v7
         with:
           node-version: 24

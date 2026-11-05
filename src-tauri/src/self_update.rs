@@ -2,7 +2,7 @@
 //!
 //! - Check: `GET api.github.com/repos/jashxn/ethos-manager/releases/latest` (published releases
 //!   only, never a draft or prerelease) at start and every 6 h while `self_update` is on,
-//!   or on Check now. A `vX.Y.Z` tag newer than this build (`newer`: never the same or older)
+//!   or on Check now. An `em-vX.Y.Z` tag newer than this build (`newer`: never the same or older)
 //!   with the assets `EthosManager-Setup-X.Y.Z.exe` and `.exe.sig` is an update; `app://update` says so.
 //! - Install (`install`, only on the user's click): asks GitHub again, downloads both (https only,
 //!   from github.com, redirected only to GitHub's asset hosts; ≤ 200 MB and ≤ 4 KB) into a fresh
@@ -10,7 +10,7 @@
 //!   ECDSA P-256 / SHA-256 signature of `EthosManager-Setup-X.Y.Z.exe\n` followed by exactly those bytes
 //!   against `PUBLIC_KEY` (Windows CNG): the version is signed too, so an older installer can't
 //!   pass as a newer one. Only then, and if no launch or Roblox install started meanwhile, runs it
-//!   silently with `/RELAUNCH` (RoALT.iss starts RoALT again afterwards) and
+//!   silently with `/RELAUNCH` (EthosManager.iss starts RoALT again afterwards) and
 //!   quits, so its files can be replaced. The folder is left to the installer; the next start
 //!   deletes it.
 
@@ -50,7 +50,7 @@ const MAX_SIG: u64 = 4_096;
 /// Where release assets may come from: github.com, then GitHub's redirect to its storage.
 const ASSET_HOSTS: [&str; 3] = ["github.com", "objects.githubusercontent.com", "release-assets.githubusercontent.com"];
 const TEMP_PREFIX: &str = "ethos-manager-update-";
-/// Inno Setup's silent install; `/RELAUNCH` is RoALT.iss's own: start RoALT when done.
+/// Inno Setup's silent install; `/RELAUNCH` is EthosManager.iss's own: start RoALT when done.
 const INSTALLER_ARGS: [&str; 5] = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/CLOSEAPPLICATIONS", "/RELAUNCH"];
 /// The release signing key (P-256, uncompressed X‖Y): its private half is the `ETHOS_UPDATE_KEY`
 /// secret of the release workflow, never in this repository.
@@ -118,10 +118,10 @@ fn version_key(s: &str) -> Option<(u64, u64, u64, bool)> {
     parts.next().is_none().then_some(key)
 }
 
-/// The version of `tag` (`vX.Y.Z`, no prerelease) when it is newer than `current`; never the same
+/// The version of `tag` (`em-vX.Y.Z`, no prerelease) when it is newer than `current`; never the same
 /// or an older one, nor anything when `current` can't be read.
 pub fn newer(current: &str, tag: &str) -> Option<String> {
-    let v = tag.strip_prefix('v')?;
+    let v = tag.strip_prefix("em-v")?;
     let new = version_key(v).filter(|k| k.3)?;
     (new > version_key(current)?).then(|| v.to_owned())
 }
@@ -478,28 +478,33 @@ mod tests {
     #[test]
     fn versions() {
         for (current, tag, want) in [
-            ("0.5.1", "v0.5.2", Some("0.5.2")),
-            ("0.5.1", "v0.6.0", Some("0.6.0")),
-            ("0.5.1", "v1.0.0", Some("1.0.0")),
-            ("0.9.9", "v0.10.0", Some("0.10.0")),
-            ("0.6.0-beta.1", "v0.6.0", Some("0.6.0")),
-            ("0.5.1", "v0.5.1", None),
-            ("0.5.1", "v0.5.0", None),
-            ("0.10.0", "v0.9.9", None),
-            ("0.6.0", "v0.6.0-beta.2", None),
-            ("0.5.1", "v0.7.0-rc.1", None),
+            ("0.5.1", "em-v0.5.2", Some("0.5.2")),
+            ("0.5.1", "em-v0.6.0", Some("0.6.0")),
+            ("0.5.1", "em-v1.0.0", Some("1.0.0")),
+            ("0.9.9", "em-v0.10.0", Some("0.10.0")),
+            ("0.6.0-beta.1", "em-v0.6.0", Some("0.6.0")),
+            ("0.5.1", "em-v0.5.1", None),
+            ("0.5.1", "em-v0.5.0", None),
+            ("0.10.0", "em-v0.9.9", None),
+            ("0.6.0", "em-v0.6.0-beta.2", None),
+            ("0.5.1", "em-v0.7.0-rc.1", None),
             ("0.5.1", "0.6.0", None),
             ("0.5.1", "V0.6.0", None),
-            ("0.5.1", "v0.6", None),
-            ("0.5.1", "v0.6.0.1", None),
-            ("0.5.1", "v0.06.0", None),
-            ("0.5.1", "v0.6.0+build", None),
-            ("0.5.1", "v 0.6.0", None),
-            ("0.5.1", "v0.6.x", None),
-            ("0.5.1", "v-1.6.0", None),
-            ("0.5.1", "v99999999999.0.0", None),
-            ("", "v0.6.0", None),
-            ("garbage", "v0.6.0", None),
+            ("0.5.1", "em-v0.6", None),
+            ("0.5.1", "em-v0.6.0.1", None),
+            ("0.5.1", "em-v0.06.0", None),
+            ("0.5.1", "em-v0.6.0+build", None),
+            ("0.5.1", "em-v 0.6.0", None),
+            ("0.5.1", "em-v0.6.x", None),
+            ("0.5.1", "em-v-1.6.0", None),
+            ("0.5.1", "em-v99999999999.0.0", None),
+            ("", "em-v0.6.0", None),
+            ("garbage", "em-v0.6.0", None),
+            ("0.5.1", "v0.6.0", None),
+            ("0.1.0", "v0.9.2", None),
+            ("0.5.1", "em-0.6.0", None),
+            ("0.5.1", "EM-v0.6.0", None),
+            ("0.5.1", "xem-v0.6.0", None),
         ] {
             assert_eq!(newer(current, tag).as_deref(), want, "{current} → {tag}");
         }
@@ -514,7 +519,7 @@ mod tests {
     fn with_sig(mut v: Value) -> Value {
         let mut sig = v["assets"][0].clone();
         sig["name"] = "EthosManager-Setup-0.5.1.exe.sig".into();
-        sig["browser_download_url"] = "https://github.com/jashxn/ethos-manager/releases/download/v0.5.1/EthosManager-Setup-0.5.1.exe.sig".into();
+        sig["browser_download_url"] = "https://github.com/jashxn/ethos-manager/releases/download/em-v0.5.1/EthosManager-Setup-0.5.1.exe.sig".into();
         v["assets"].as_array_mut().unwrap().push(sig);
         v
     }
@@ -523,7 +528,7 @@ mod tests {
         serde_json::to_vec(v).unwrap()
     }
 
-    /// A recorded releases/latest answer (v0.5.1, which has no `.sig` yet).
+    /// A recorded releases/latest answer (em-v0.5.1, which has no `.sig` yet).
     #[test]
     fn picks_the_signed_installer() {
         let recorded = fixture();
@@ -537,8 +542,8 @@ mod tests {
             pick(&body(&signed), "0.5.0").unwrap(),
             Some(Release {
                 version: "0.5.1".into(),
-                exe: "https://github.com/jashxn/ethos-manager/releases/download/v0.5.1/EthosManager-Setup-0.5.1.exe".into(),
-                sig: "https://github.com/jashxn/ethos-manager/releases/download/v0.5.1/EthosManager-Setup-0.5.1.exe.sig".into(),
+                exe: "https://github.com/jashxn/ethos-manager/releases/download/em-v0.5.1/EthosManager-Setup-0.5.1.exe".into(),
+                sig: "https://github.com/jashxn/ethos-manager/releases/download/em-v0.5.1/EthosManager-Setup-0.5.1.exe.sig".into(),
             })
         );
         for flag in ["draft", "prerelease"] {
@@ -546,10 +551,13 @@ mod tests {
             v[flag] = true.into();
             assert_eq!(pick(&body(&v), "0.5.0").unwrap(), None, "{flag}");
         }
+        let mut upstream = signed.clone();
+        upstream["tag_name"] = "v0.9.2".into();
+        assert_eq!(pick(&body(&upstream), "0.1.0").unwrap(), None, "plain v tag");
         // Asset names must match exactly, and come from github.com over https.
         for (field, value) in [
             ("name", "ethosmanager-setup-0.5.1.exe"),
-            ("browser_download_url", "http://github.com/jashxn/ethos-manager/releases/download/v0.5.1/EthosManager-Setup-0.5.1.exe"),
+            ("browser_download_url", "http://github.com/jashxn/ethos-manager/releases/download/em-v0.5.1/EthosManager-Setup-0.5.1.exe"),
             ("browser_download_url", "https://evil.example/EthosManager-Setup-0.5.1.exe"),
             ("browser_download_url", "https://github.com.evil.example/EthosManager-Setup-0.5.1.exe"),
             ("browser_download_url", "https://github.com:8443/EthosManager-Setup-0.5.1.exe"),
