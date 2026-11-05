@@ -199,7 +199,7 @@ impl Bulk {
     /// Marks an auto-rejoin in flight until the guard drops; None while a batch runs.
     pub fn begin_rejoin(&self) -> Option<Busy<'_>> {
         let batch = self.batch();
-        (!batch.as_ref().is_some_and(|b| !b.progress.done)).then(|| busy(&self.rejoining))
+        batch.as_ref().is_none_or(|b| b.progress.done).then(|| busy(&self.rejoining))
     }
 
     /// Marks a launch in flight until the guard drops.
