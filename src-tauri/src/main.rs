@@ -78,13 +78,13 @@ impl App {
     }
 }
 
-pub const DB_FILE: &str = "roalt.db";
+pub const DB_FILE: &str = "ethos-manager.db";
 /// The database, its journal and its key (`storage::key_path`): all a data folder move ever
 /// deletes, from the old folder.
-pub const DB_FILES: [&str; 4] = [DB_FILE, "roalt.db-wal", "roalt.db-shm", "roalt.db.key"];
+pub const DB_FILES: [&str; 4] = [DB_FILE, "ethos-manager.db-wal", "ethos-manager.db-shm", "ethos-manager.db.key"];
 const LOCATION: &str = "location.json";
 
-/// `%LOCALAPPDATA%\RoALT\location.json`: where the data folder was moved to (and from, until
+/// `%LOCALAPPDATA%\EthosManager\location.json`: where the data folder was moved to (and from, until
 /// the next start has deleted the old database).
 #[derive(Serialize, Deserialize, Debug, PartialEq)]
 #[serde(rename_all = "camelCase")]
@@ -94,22 +94,22 @@ pub struct Location {
     pub moved_from: Option<PathBuf>,
 }
 
-/// `%LOCALAPPDATA%\RoALT`: the data folder unless moved, and where location.json lives.
+/// `%LOCALAPPDATA%\EthosManager`: the data folder unless moved, and where location.json lives.
 pub fn default_dir() -> PathBuf {
-    std::env::var_os("LOCALAPPDATA").map(PathBuf::from).unwrap_or_else(std::env::temp_dir).join("RoALT")
+    std::env::var_os("LOCALAPPDATA").map(PathBuf::from).unwrap_or_else(std::env::temp_dir).join("EthosManager")
 }
 
-/// A test run (`ROALT_DATA_DIR`): its data folder can't be moved.
+/// A test run (`ETHOS_MANAGER_DATA_DIR`): its data folder can't be moved.
 pub fn data_dir_overridden() -> bool {
-    std::env::var_os("ROALT_DATA_DIR").is_some()
+    std::env::var_os("ETHOS_MANAGER_DATA_DIR").is_some()
 }
 
-/// `ROALT_DATA_DIR` (test runs), else the folder `%LOCALAPPDATA%\RoALT\location.json` names
-/// (`dataDir`), else `%LOCALAPPDATA%\RoALT`. After a move, also the folder it left
+/// `ETHOS_MANAGER_DATA_DIR` (test runs), else the folder `%LOCALAPPDATA%\EthosManager\location.json` names
+/// (`dataDir`), else `%LOCALAPPDATA%\EthosManager`. After a move, also the folder it left
 /// (`movedFrom`): `init` deletes its database files once the new database has opened, then
 /// drops `movedFrom`. Err: the moved folder isn't available (a message for `fatal`).
 fn data_dir() -> std::result::Result<(PathBuf, Option<PathBuf>), String> {
-    if let Some(d) = std::env::var_os("ROALT_DATA_DIR") {
+    if let Some(d) = std::env::var_os("ETHOS_MANAGER_DATA_DIR") {
         return Ok((d.into(), None));
     }
     let default = default_dir();
@@ -119,7 +119,7 @@ fn data_dir() -> std::result::Result<(PathBuf, Option<PathBuf>), String> {
 
 /// The folder location.json points at, with `movedFrom`: its `dataDir` when that is a full
 /// path; else `default`. Missing or malformed JSON counts as no move. A moved folder without
-/// a roalt.db (a drive not connected) is an error, not a fresh empty vault in `default`.
+/// an ethos-manager.db (a drive not connected) is an error, not a fresh empty vault in `default`.
 fn chosen_dir(default: PathBuf, json: Option<&str>) -> std::result::Result<(PathBuf, Option<PathBuf>), String> {
     match json.and_then(|j| serde_json::from_str::<Location>(j).ok()) {
         Some(l) if l.data_dir.is_absolute() => {
@@ -129,7 +129,7 @@ fn chosen_dir(default: PathBuf, json: Option<&str>) -> std::result::Result<(Path
                 Ok((default, None))
             } else {
                 Err(tr!(
-                    "RoALT's data folder {folder} isn't available (no {db}). Connect that drive and start RoALT again, \
+                    "Ethos Manager's data folder {folder} isn't available (no {db}). Connect that drive and start Ethos Manager again, \
                      or delete {location} to start fresh in the default folder.",
                     folder = l.data_dir.display(),
                     db = DB_FILE,
@@ -170,17 +170,17 @@ pub fn move_target(current: &Path, path: &str) -> Result<PathBuf> {
     let refuse = |why: String| Err(AppError::Invalid(why));
     let path = Path::new(path.trim());
     if !path.is_absolute() {
-        return refuse(tr!("Pick a full folder path, like D:\\RoALT."));
+        return refuse(tr!("Pick a full folder path, like D:\\EthosManager."));
     }
     let target = std::path::absolute(path)?;
     if same_dir(&target, current) {
-        return refuse(tr!("RoALT already keeps its data there."));
+        return refuse(tr!("Ethos Manager already keeps its data there."));
     }
     if path_key(&target).starts_with(&path_key(current)) {
         return refuse(tr!("Pick a folder outside the current data folder."));
     }
     if DB_FILES.iter().any(|f| target.join(f).exists()) {
-        return refuse(tr!("That folder already has a RoALT database. Pick another one."));
+        return refuse(tr!("That folder already has an Ethos Manager database. Pick another one."));
     }
     Ok(target)
 }
@@ -196,7 +196,7 @@ fn finish_move(data_dir: &Path, old: &Path) {
     }
 }
 
-/// Deletes roalt.db and its journal files from `old`: nothing else, and nothing when `old` is
+/// Deletes ethos-manager.db and its journal files from `old`: nothing else, and nothing when `old` is
 /// the folder in use. True when none of them is left there.
 fn remove_old_db(data_dir: &Path, old: &Path) -> bool {
     if same_dir(old, data_dir) {
@@ -222,7 +222,7 @@ fn main_window(app: &TauriApp, data_dir: &Path, skip_splash: bool) -> tauri::Res
     let bg = Color(5, 5, 6, 255);
 
     let mut builder = WebviewWindowBuilder::new(app, "main", WebviewUrl::App("index.html".into()))
-        .title("RoALT")
+        .title("Ethos Manager")
         .inner_size(splash::DEFAULT.0, splash::DEFAULT.1)
         // The minimum size is set once the splash has grown (`splash`); shown by it too.
         .visible(false)
@@ -330,12 +330,12 @@ fn fatal(message: &str) -> ! {
     log::error!("{message}");
     // Before the log plugin exists `log::error!` goes nowhere, so append the line directly.
     if let Some(dir) = LOG_DIR.get()
-        && let Ok(mut f) = std::fs::OpenOptions::new().create(true).append(true).open(dir.join("roalt.log"))
+        && let Ok(mut f) = std::fs::OpenOptions::new().create(true).append(true).open(dir.join("ethos-manager.log"))
     {
         let _ = writeln!(f, "[fatal] {message}");
     }
     // SAFETY: a plain modal message box with no owner window.
-    unsafe { MessageBoxW(None, &windows::core::HSTRING::from(message), windows::core::w!("RoALT"), MB_ICONERROR | MB_OK) };
+    unsafe { MessageBoxW(None, &windows::core::HSTRING::from(message), windows::core::w!("Ethos Manager"), MB_ICONERROR | MB_OK) };
     std::process::exit(1)
 }
 
@@ -360,14 +360,14 @@ fn panic_hook() {
 fn init(app: &TauriApp, data_dir: &Path, moved_from: Option<&Path>) -> std::result::Result<(), String> {
     webview::sweep_temp_profiles(data_dir);
     let db_path = data_dir.join(DB_FILE);
-    let db = storage::Db::open(&db_path).map_err(|e| tr!("RoALT can't open its database {path}: {why}", path = db_path.display(), why = e.message()))?;
+    let db = storage::Db::open(&db_path).map_err(|e| tr!("Ethos Manager can't open its database {path}: {why}", path = db_path.display(), why = e.message()))?;
     let record = db.vault_record().map_err(|e| e.message())?;
     // Only a database with a vault is the copy that replaces the old one.
     let moved_from = moved_from.filter(|_| record.is_some());
     let vault = match record {
         Some(rec) => vault::Vault::open(&rec).map_err(|e| {
             tr!(
-                "RoALT can't open its vault on this Windows account ({why}).\n\nIf this data folder came from another PC or \
+                "Ethos Manager can't open its vault on this Windows account ({why}).\n\nIf this data folder came from another PC or \
                  Windows account, rename {path} and import a .roalt backup.",
                 why = e.message(),
                 path = db_path.display()
@@ -433,7 +433,7 @@ fn init(app: &TauriApp, data_dir: &Path, moved_from: Option<&Path>) -> std::resu
     app.manage(splash::Pending::default());
     main_window(app, data_dir, settings.skip_splash).map_err(|e| {
         tr!(
-            "RoALT can't open its window ({why}).\n\nIf this PC was very busy, start RoALT again. Otherwise it needs the Microsoft Edge WebView2 Runtime: \
+            "Ethos Manager can't open its window ({why}).\n\nIf this PC was very busy, start Ethos Manager again. Otherwise it needs the Microsoft Edge WebView2 Runtime: \
              https://go.microsoft.com/fwlink/p/?LinkId=2124703",
             why = e
         )
@@ -490,24 +490,25 @@ fn main() {
     i18n::set("");
     let (data_dir, moved_from) = data_dir().unwrap_or_else(|e| fatal(&e));
     if let Err(e) = std::fs::create_dir_all(&data_dir) {
-        fatal(&tr!("RoALT can't create its data folder {path}: {why}", path = data_dir.display(), why = e));
+        fatal(&tr!("Ethos Manager can't create its data folder {path}: {why}", path = data_dir.display(), why = e));
     }
     let log_dir = data_dir.join("logs");
     let _ = std::fs::create_dir_all(&log_dir);
     let _ = LOG_DIR.set(log_dir.clone());
 
-    tauri::Builder::default()
-        // Must be first: a second launch shows the running window instead.
-        .plugin(tauri_plugin_single_instance::init(|app, _, _| tray::show_main(app)))
+    let builder = tauri::Builder::default();
+    // Must be first: a second launch shows the running window instead.
+    let builder = if data_dir_overridden() { builder } else { builder.plugin(tauri_plugin_single_instance::init(|app, _, _| tray::show_main(app))) };
+    builder
         .plugin(
             tauri_plugin_log::Builder::new()
                 .clear_targets()
-                .target(Target::new(TargetKind::Folder { path: log_dir, file_name: Some("roalt".into()) }))
+                .target(Target::new(TargetKind::Folder { path: log_dir, file_name: Some("ethos-manager".into()) }))
                 // The Debug tab (`log://log` events); its history comes from `commands::debug_tail`.
                 .target(Target::new(TargetKind::Webview))
                 .level(log::LevelFilter::Info)
-                .level_for("roalt", log::LevelFilter::Debug)
-                // roalt.log plus the 4 before it, 5 MB each.
+                .level_for("ethos_manager", log::LevelFilter::Debug)
+                // ethos-manager.log plus the 4 before it, 5 MB each.
                 .max_file_size(5 << 20)
                 .rotation_strategy(RotationStrategy::KeepSome(5))
                 .build(),
@@ -639,7 +640,7 @@ fn main() {
             commands::network_status,
         ]))
         .build(tauri::generate_context!())
-        .unwrap_or_else(|e| fatal(&tr!("RoALT failed to start: {why}", why = e)))
+        .unwrap_or_else(|e| fatal(&tr!("Ethos Manager failed to start: {why}", why = e)))
         .run(|app, event| {
             // Before the Exit event: the clipboard plugin has cleaned up by then.
             if let tauri::RunEvent::ExitRequested { .. } = event {
@@ -681,7 +682,7 @@ mod tests {
     fn location_json_picks_a_folder_with_a_database() {
         let tmp = temp_dir();
         let (default, moved, empty) = (tmp.join("default"), tmp.join("moved"), tmp.join("empty"));
-        touch(&moved.join("roalt.db"));
+        touch(&moved.join("ethos-manager.db"));
         std::fs::create_dir_all(&empty).unwrap();
         let pick = |j: Option<&str>| chosen_dir(default.clone(), j).unwrap();
 
@@ -709,7 +710,7 @@ mod tests {
     fn move_targets() {
         let tmp = temp_dir();
         let current = tmp.join("Current");
-        touch(&current.join("roalt.db"));
+        touch(&current.join("ethos-manager.db"));
         let refused = |p: &Path| matches!(move_target(&current, &p.display().to_string()), Err(AppError::Invalid(_)));
 
         assert!(matches!(move_target(&current, r"relative\folder"), Err(AppError::Invalid(_))));
@@ -740,7 +741,7 @@ mod tests {
     fn a_finished_move_deletes_only_the_old_database() {
         let tmp = temp_dir();
         let (old, new) = (tmp.join("old"), tmp.join("new"));
-        for f in DB_FILES.iter().chain(&["notes.txt", r"logs\roalt.log", r"webview\x"]) {
+        for f in DB_FILES.iter().chain(&["notes.txt", r"logs\ethos-manager.log", r"webview\x"]) {
             touch(&old.join(f));
             touch(&new.join(f));
         }
@@ -760,7 +761,7 @@ mod tests {
         assert!(remove_old_db(&new, &old));
         assert_eq!(left(&old), 0);
         assert_eq!(left(&new), DB_FILES.len());
-        assert!(old.join("notes.txt").exists() && old.join(r"logs\roalt.log").exists() && old.join(r"webview\x").exists());
+        assert!(old.join("notes.txt").exists() && old.join(r"logs\ethos-manager.log").exists() && old.join(r"webview\x").exists());
         // Already gone: nothing to do.
         assert!(remove_old_db(&new, &old));
         std::fs::remove_dir_all(&tmp).unwrap();

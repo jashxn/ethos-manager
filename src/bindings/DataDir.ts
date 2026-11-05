@@ -5,10 +5,10 @@
  */
 export type DataDir = { path: string, 
 /**
- * `%LOCALAPPDATA%\RoALT` (not moved).
+ * `%LOCALAPPDATA%\EthosManager` (not moved).
  */
 default: boolean, 
 /**
- * Set for test runs (`ROALT_DATA_DIR`): moving is not offered.
+ * Set for test runs (`ETHOS_MANAGER_DATA_DIR`): moving is not offered.
  */
 overridden: boolean, };

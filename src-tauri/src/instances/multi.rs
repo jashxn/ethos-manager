@@ -343,7 +343,7 @@ fn close_in(pid: u32, table: &[(u32, usize)], suffix: &str) -> Result<usize> {
     let proc = unsafe { OpenProcess(PROCESS_DUP_HANDLE, false, pid) }
         // SAFETY: as above.
         .map(|h| unsafe { Owned::new(h) })
-        .map_err(|e| AppError::Invalid(tr!("Windows wouldn't let RoALT into Roblox (process {pid}): {why}", pid = pid, why = e.message())))?;
+        .map_err(|e| AppError::Invalid(tr!("Windows wouldn't let Ethos Manager into Roblox (process {pid}): {why}", pid = pid, why = e.message())))?;
     let mut closed = 0;
     for &(_, value) in table.iter().filter(|(p, _)| *p == pid) {
         let source = HANDLE(value as *mut c_void);
@@ -520,7 +520,7 @@ mod tests {
         assert!(m.has_survivors());
         assert_eq!(m.held().as_ref().unwrap().survivors.len(), 1);
         m.adopt(&[(child.id(), t)]);
-        assert!(!m.has_survivors(), "followed again: RoALT's own");
+        assert!(!m.has_survivors(), "followed again: Ethos Manager's own");
         m.held().as_mut().unwrap().survivors = vec![(child.id(), t)];
         child.kill().unwrap();
         child.wait().unwrap();

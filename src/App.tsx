@@ -222,7 +222,7 @@ function Shell({ vault, settings, onRecoveryCode }: { vault: VaultStatus; settin
   const known = useRef<Set<number> | null>(null);
   const viewName = t(({ dashboard: "app.nav.dashboard", accounts: "app.nav.accounts", launch: "app.nav.launch", performance: "app.nav.performance", servers: "app.nav.servers", monitor: "app.nav.monitor", discord: "app.nav.discord", debug: "app.nav.debug", settings: "app.nav.settings" } as const)[view]);
   useEffect(() => {
-    document.title = `${viewName} · RoALT`;
+    document.title = `${viewName} · Ethos Manager`;
   }, [viewName]);
 
   // A new account needs its headshot; the backend only asks Roblox for the missing ones.

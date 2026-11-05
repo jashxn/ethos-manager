@@ -1185,9 +1185,9 @@ pub enum InstallProgress {
 #[ts(export)]
 pub struct DataDir {
     pub path: String,
-    /// `%LOCALAPPDATA%\RoALT` (not moved).
+    /// `%LOCALAPPDATA%\EthosManager` (not moved).
     pub default: bool,
-    /// Set for test runs (`ROALT_DATA_DIR`): moving is not offered.
+    /// Set for test runs (`ETHOS_MANAGER_DATA_DIR`): moving is not offered.
     pub overridden: bool,
 }
 

@@ -335,7 +335,7 @@ function ShareRow({ onProfile }: { onProfile: (p: Profile) => void }) {
 
   async function exportFile() {
     try {
-      const path = await saveFile({ defaultPath: `RoALT-performance-${new Date().toISOString().slice(0, 10)}.json`, filters: profileFilter() });
+      const path = await saveFile({ defaultPath: `EthosManager-performance-${new Date().toISOString().slice(0, 10)}.json`, filters: profileFilter() });
       if (!path) return;
       await api.performanceExport(path, storedFps());
       toast(t("performance.exported"));

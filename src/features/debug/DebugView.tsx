@@ -140,7 +140,7 @@ export function DebugView() {
       .then(() => toast(t("debug.reportCopied")), toastError);
   const saveReport = async () => {
     try {
-      const path = await saveFile({ defaultPath: `RoALT-diagnostics-${new Date().toISOString().slice(0, 10)}.txt`, filters: [{ name: t("debug.reportFilter"), extensions: ["txt"] }] });
+      const path = await saveFile({ defaultPath: `EthosManager-diagnostics-${new Date().toISOString().slice(0, 10)}.txt`, filters: [{ name: t("debug.reportFilter"), extensions: ["txt"] }] });
       if (!path) return;
       await api.diagnosticsSave(path);
       toast(t("debug.reportSaved"));

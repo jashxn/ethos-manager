@@ -1,7 +1,7 @@
 {
-  "name": "roalt",
+  "name": "ethos-manager",
   "private": true,
-  "version": "0.9.2",
+  "version": "0.1.0",
   "license": "MIT",
   "type": "module",
   "scripts": {

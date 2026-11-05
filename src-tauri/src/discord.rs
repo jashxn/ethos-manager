@@ -136,8 +136,8 @@ impl Event {
                 "⛔ {}",
                 trn!(
                     *count,
-                    "**{name}**: RoALT gave up after {n} relaunch in {minutes} min.",
-                    "**{name}**: RoALT gave up after {n} relaunches in {minutes} min.",
+                    "**{name}**: Ethos Manager gave up after {n} relaunch in {minutes} min.",
+                    "**{name}**: Ethos Manager gave up after {n} relaunches in {minutes} min.",
                     name = name,
                     minutes = window_min
                 )
@@ -227,9 +227,9 @@ pub fn message(events: &[Event]) -> Value {
         _ => 0xB4_F0_00,
     };
     json!({
-        "username": "RoALT",
+        "username": "Ethos Manager",
         "allowed_mentions": { "parse": [] },
-        "embeds": [{ "title": "RoALT", "description": lines.join("\n"), "color": color }],
+        "embeds": [{ "title": "Ethos Manager", "description": lines.join("\n"), "color": color }],
     })
 }
 
@@ -368,9 +368,9 @@ pub fn set(s: &App, url: Option<&str>) -> Result<DiscordStatus> {
 pub async fn test(s: &App) -> Result<()> {
     let hook = webhook(s)?.ok_or_else(|| AppError::Invalid(tr!("Set a webhook first.")))?;
     let body = json!({
-        "username": "RoALT",
+        "username": "Ethos Manager",
         "allowed_mentions": { "parse": [] },
-        "embeds": [{ "title": "RoALT", "description": format!("✅ {}", tr!("Test message: RoALT's alerts reach this channel.")), "color": 0xB4_F0_00 }],
+        "embeds": [{ "title": "Ethos Manager", "description": format!("✅ {}", tr!("Test message: Ethos Manager's alerts reach this channel.")), "color": 0xB4_F0_00 }],
     });
     let now = Instant::now();
     let r = post(s, &hook, &body).await;
@@ -667,7 +667,7 @@ mod tests {
     fn builds_one_embed_per_message() {
         let crash = Event::Crash { name: "Nova (@nova\\_builds)".into(), place_id: Some(1818) };
         let one = message(std::slice::from_ref(&crash));
-        assert_eq!(one["username"], "RoALT");
+        assert_eq!(one["username"], "Ethos Manager");
         assert_eq!(one["allowed_mentions"]["parse"], json!([]));
         let embeds = one["embeds"].as_array().unwrap();
         assert_eq!(embeds.len(), 1);

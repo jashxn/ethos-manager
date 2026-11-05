@@ -962,7 +962,7 @@ fn restore(app: &AppHandle) {
         super::limits::reset_followed(pid, t0);
     }
     s.multi.adopt(&found);
-    log::info!("following {} client(s) from before RoALT restarted", found.len());
+    log::info!("following {} client(s) from before Ethos Manager restarted", found.len());
     if total > found.len() {
         log::debug!("{} saved client(s) no longer running, dropped", total - found.len());
     }
@@ -2042,7 +2042,7 @@ mod tests {
             assert_eq!(wants_rejoin(&inst(state, Some(HUNG)), &none, true), Some(Hang), "{state:?}");
         }
         assert_eq!(wants_rejoin(&inst(Disconnected, Some(HUNG)), &kicked, true), Some(Hang));
-        assert_eq!(wants_rejoin(&inst(Exited, Some("Closed")), &none, true), None, "a hung client RoALT closed");
+        assert_eq!(wants_rejoin(&inst(Exited, Some("Closed")), &none, true), None, "a hung client Ethos Manager closed");
     }
 
     #[test]

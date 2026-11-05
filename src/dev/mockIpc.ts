@@ -211,7 +211,7 @@ function perfProfile(previewFps: number) {
 
 /** The profile in `text` as performance_parse returns it, or the error message. */
 function perfParse(text: string): Record<string, unknown> | string {
-  const refused = "This isn't a RoALT performance profile.";
+  const refused = "This isn't an Ethos Manager performance profile.";
   let file: { format?: unknown; version?: number; settings?: Record<string, unknown> };
   try {
     file = JSON.parse(text);
@@ -219,7 +219,7 @@ function perfParse(text: string): Record<string, unknown> | string {
     return refused;
   }
   if (file?.format !== "roalt-performance") return refused;
-  if ((file.version ?? 0) > 1) return "This profile was made by a newer RoALT; update RoALT first.";
+  if ((file.version ?? 0) > 1) return "This profile was made by a newer Ethos Manager; update Ethos Manager first.";
   const p = file.settings ?? {};
   const fps = p.fpsCap as number | undefined;
   if (fps && (fps < 5 || fps > 360)) return "The FPS cap must be 0 (off) or 5 to 360.";
@@ -280,14 +280,14 @@ function logLine(level: number, target: string, message: string, live = true) {
   if (live) emit("log://log", { level, message: line });
 }
 [
-  [3, "roalt", "multi-instance not active at start: another client holds the singleton"],
-  [4, "roalt::roblox_api", "users.roblox.com/v1/users/authenticated: HTTP 401, code Some((0, 0)): This cookie is not valid or has expired. Sign in again."],
-  [3, "roalt::commands", "account 3 marked Invalid: This cookie is not valid or has expired. Sign in again."],
-  [2, "roalt::instances::tracker", "instance 7f3a: client log not readable: The process cannot access the file"],
-  [5, "roalt", "panic in thread tokio-runtime-worker at src/instances/tracker.rs:612:9: index out of bounds"],
+  [3, "ethos_manager", "multi-instance not active at start: another client holds the singleton"],
+  [4, "ethos_manager::roblox_api", "users.roblox.com/v1/users/authenticated: HTTP 401, code Some((0, 0)): This cookie is not valid or has expired. Sign in again."],
+  [3, "ethos_manager::commands", "account 3 marked Invalid: This cookie is not valid or has expired. Sign in again."],
+  [2, "ethos_manager::instances::tracker", "instance 7f3a: client log not readable: The process cannot access the file"],
+  [5, "ethos_manager", "panic in thread tokio-runtime-worker at src/instances/tracker.rs:612:9: index out of bounds"],
   [4, "roblox", "account 2 instance 7f3a: [FLog::Error] Texture failed to load (x3)"],
 ].forEach(([l, t, m]) => logLine(l as number, t as string, m as string, false));
-setInterval(() => logLine(1 + Math.ceil(Math.random() * 4), "roalt::mock", "periodic mock line"), 4000);
+setInterval(() => logLine(1 + Math.ceil(Math.random() * 4), "ethos_manager::mock", "periodic mock line"), 4000);
 
 setInterval(() => {
   if (!settings.antiAfk.enabled) return;
@@ -1065,7 +1065,7 @@ async function handle(cmd: string, args: Args): Promise<unknown> {
           ]
         : [];
     case "diagnostics_text":
-      return "RoALT (preview) diagnostics";
+      return "Ethos Manager (preview) diagnostics";
     case "diagnostics_save":
       return null;
     case "crashes_list":
@@ -1099,8 +1099,8 @@ async function handle(cmd: string, args: Args): Promise<unknown> {
       appUpdate = NEXT_VERSION;
       return { current: APP_VERSION, available: appUpdate };
     case "self_update_install":
-      if (!appUpdate) return fail("invalid", "RoALT is up to date.");
-      if (batch && !batch.done) return fail("invalid", "Wait for the running launch, batch or auto-rejoin to finish, then update RoALT.");
+      if (!appUpdate) return fail("invalid", "Ethos Manager is up to date.");
+      if (batch && !batch.done) return fail("invalid", "Wait for the running launch, batch or auto-rejoin to finish, then update Ethos Manager.");
       // Downloading, checking, then the installer restarts the app.
       await sleep(2500);
       location.reload();
@@ -1130,7 +1130,7 @@ async function handle(cmd: string, args: Args): Promise<unknown> {
       }
     }
     case "data_dir_info":
-      return { path: "C:\\Users\\you\\AppData\\Local\\RoALT", default: true, overridden: false };
+      return { path: "C:\\Users\\you\\AppData\\Local\\EthosManager", default: true, overridden: false };
     case "data_dir_open":
     case "logs_open":
       return null;
@@ -1180,7 +1180,7 @@ async function handle(cmd: string, args: Args): Promise<unknown> {
     case "data_dir_move":
       await sleep(1200);
       if (batch && !batch.done) return fail("invalid", MOVE_BUSY);
-      if (/bad/i.test(args.path)) return fail("invalid", "That folder already has a RoALT database. Pick another one.");
+      if (/bad/i.test(args.path)) return fail("invalid", "That folder already has an Ethos Manager database. Pick another one.");
       location.reload();
       return new Promise(() => {});
 
@@ -1218,7 +1218,7 @@ async function handle(cmd: string, args: Args): Promise<unknown> {
     case "plugin:dialog|save":
       return `C:\\Users\\you\\Documents\\${args.options?.defaultPath ?? "backup.roalt"}`;
     case "plugin:dialog|open":
-      return args.options?.directory ? "D:\\RoALT data" : "C:\\Users\\you\\Documents\\RoALT-backup-2026-10-01.roalt";
+      return args.options?.directory ? "D:\\Ethos Manager data" : "C:\\Users\\you\\Documents\\EthosManager-backup-2026-10-01.roalt";
     case "plugin:window|is_maximized":
       return false;
     default:

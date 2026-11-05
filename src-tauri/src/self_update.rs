@@ -1,13 +1,13 @@
 //! RoALT's own updates (Roblox's are `launcher::update`).
 //!
-//! - Check: `GET api.github.com/repos/inspectsoftware/RoALT/releases/latest` (published releases
+//! - Check: `GET api.github.com/repos/jashxn/ethos-manager/releases/latest` (published releases
 //!   only, never a draft or prerelease) at start and every 6 h while `self_update` is on,
 //!   or on Check now. A `vX.Y.Z` tag newer than this build (`newer`: never the same or older)
-//!   with the assets `RoALT-Setup-X.Y.Z.exe` and `.exe.sig` is an update; `app://update` says so.
+//!   with the assets `EthosManager-Setup-X.Y.Z.exe` and `.exe.sig` is an update; `app://update` says so.
 //! - Install (`install`, only on the user's click): asks GitHub again, downloads both (https only,
 //!   from github.com, redirected only to GitHub's asset hosts; ≤ 200 MB and ≤ 4 KB) into a fresh
 //!   temp folder, write-locks the installer, reads it back through that handle and checks the
-//!   ECDSA P-256 / SHA-256 signature of `RoALT-Setup-X.Y.Z.exe\n` followed by exactly those bytes
+//!   ECDSA P-256 / SHA-256 signature of `EthosManager-Setup-X.Y.Z.exe\n` followed by exactly those bytes
 //!   against `PUBLIC_KEY` (Windows CNG): the version is signed too, so an older installer can't
 //!   pass as a newer one. Only then, and if no launch or Roblox install started meanwhile, runs it
 //!   silently with `/RELAUNCH` (RoALT.iss starts RoALT again afterwards) and
@@ -42,19 +42,19 @@ use crate::model::AppUpdate;
 
 pub const UPDATE_EVENT: &str = "app://update";
 const CURRENT: &str = env!("CARGO_PKG_VERSION");
-const LATEST: &str = "https://api.github.com/repos/inspectsoftware/RoALT/releases/latest";
+const LATEST: &str = "https://api.github.com/repos/jashxn/ethos-manager/releases/latest";
 const CHECK_EVERY: Duration = Duration::from_secs(6 * 60 * 60);
 const MAX_JSON: u64 = 1_000_000;
 const MAX_INSTALLER: u64 = 200_000_000;
 const MAX_SIG: u64 = 4_096;
 /// Where release assets may come from: github.com, then GitHub's redirect to its storage.
 const ASSET_HOSTS: [&str; 3] = ["github.com", "objects.githubusercontent.com", "release-assets.githubusercontent.com"];
-const TEMP_PREFIX: &str = "roalt-update-";
+const TEMP_PREFIX: &str = "ethos-manager-update-";
 /// Inno Setup's silent install; `/RELAUNCH` is RoALT.iss's own: start RoALT when done.
 const INSTALLER_ARGS: [&str; 5] = ["/VERYSILENT", "/SUPPRESSMSGBOXES", "/NORESTART", "/CLOSEAPPLICATIONS", "/RELAUNCH"];
-/// The release signing key (P-256, uncompressed X‖Y): its private half is the `ROALT_UPDATE_KEY`
+/// The release signing key (P-256, uncompressed X‖Y): its private half is the `ETHOS_UPDATE_KEY`
 /// secret of the release workflow, never in this repository.
-const PUBLIC_KEY: &str = "75e2530761806230914528bcedce3565121808e8576bf27eb82864485f7e5cc3031aecb007e08d37cb04bd67809c9b06c901ce058794e536ea6b71a406908623";
+const PUBLIC_KEY: &str = "30e1fdfa8e852efe8f107739ca2595826c654e4a7b1e94d12800e45d03a0920bad4e0443d9bc0cdeab788d725d04a0ad2f7630aaf2ead01f36e1e2b4c980d6fc";
 
 #[derive(Default)]
 pub struct SelfUpdater {
@@ -158,9 +158,9 @@ pub fn pick(body: &[u8], current: &str) -> Result<Option<Release>> {
                 ok
             })
     };
-    match (url(format!("RoALT-Setup-{version}.exe")), url(format!("RoALT-Setup-{version}.exe.sig"))) {
+    match (url(format!("EthosManager-Setup-{version}.exe")), url(format!("EthosManager-Setup-{version}.exe.sig"))) {
         (Some(exe), Some(sig)) => Ok(Some(Release { version, exe, sig })),
-        _ => Err(failed(tr!("RoALT {version} is out, but without a signed installer. Get it from GitHub Releases.", version = version))),
+        _ => Err(failed(tr!("Ethos Manager {version} is out, but without a signed installer. Get it from GitHub Releases.", version = version))),
     }
 }
 
@@ -244,7 +244,7 @@ fn verify(public: &[u8; 64], data: &[u8], sig: &[u8]) -> bool {
 /// What the release workflow signs for `version`: its installer's name and a newline, then the
 /// installer's bytes (appended by the caller).
 fn signed_prefix(version: &str) -> Vec<u8> {
-    format!("RoALT-Setup-{version}.exe\n").into_bytes()
+    format!("EthosManager-Setup-{version}.exe\n").into_bytes()
 }
 
 /// Writes `bytes` to the new file `path`, reopens it so nothing can write or delete it while the
@@ -257,7 +257,7 @@ fn write_verified(path: &Path, version: &str, bytes: &[u8], sig: &[u8], key: &[u
     signed.reserve(bytes.len());
     pinned.read_to_end(&mut signed)?;
     if !verify(key, &signed, sig) {
-        return Err(AppError::Invalid(tr!("The downloaded RoALT installer was not run: its signature didn't check out.")));
+        return Err(AppError::Invalid(tr!("The downloaded Ethos Manager installer was not run: its signature didn't check out.")));
     }
     Ok(pinned)
 }
@@ -282,7 +282,7 @@ fn network(e: reqwest::Error) -> AppError {
 
 fn http() -> Result<reqwest::Client> {
     reqwest::Client::builder()
-        .user_agent(concat!("RoALT/", env!("CARGO_PKG_VERSION")))
+        .user_agent(concat!("EthosManager/", env!("CARGO_PKG_VERSION")))
         .https_only(true)
         .redirect(Policy::custom(|a| {
             if a.previous().len() >= 5 {
@@ -297,7 +297,7 @@ fn http() -> Result<reqwest::Client> {
         .build()
         .map_err(|e| {
             log::warn!("update: http client unavailable: {}", e.without_url());
-            failed(tr!("RoALT's HTTP client couldn't start."))
+            failed(tr!("Ethos Manager's HTTP client couldn't start."))
         })
 }
 
@@ -357,7 +357,7 @@ pub fn switched(app: &AppHandle, on: bool) {
             Ok(u) => {
                 let _ = app.emit(UPDATE_EVENT, &u);
             }
-            Err(e) => log::info!("RoALT update check failed: {e}"),
+            Err(e) => log::info!("Ethos Manager update check failed: {e}"),
         }
     });
 }
@@ -381,7 +381,7 @@ pub fn spawn(app: AppHandle) {
                         let _ = app.emit(UPDATE_EVENT, &u);
                     }
                     Ok(_) => {}
-                    Err(e) => log::info!("RoALT update check failed: {e}"),
+                    Err(e) => log::info!("Ethos Manager update check failed: {e}"),
                 }
             }
             tokio::time::sleep(CHECK_EVERY).await;
@@ -411,12 +411,12 @@ pub async fn install(app: &AppHandle) -> Result<()> {
     s.self_update
         .installing
         .compare_exchange(false, true, Ordering::SeqCst, Ordering::SeqCst)
-        .map_err(|_| AppError::Invalid(tr!("RoALT is already being updated.")))?;
+        .map_err(|_| AppError::Invalid(tr!("Ethos Manager is already being updated.")))?;
     let result = run_install(&s).await;
     match &result {
         Ok(()) => app.exit(0),
         Err(e) => {
-            log::warn!("RoALT update failed: {e}");
+            log::warn!("Ethos Manager update failed: {e}");
             s.self_update.installing.store(false, Ordering::SeqCst);
         }
     }
@@ -426,10 +426,10 @@ pub async fn install(app: &AppHandle) -> Result<()> {
 /// Refused while a launch, batch, auto-rejoin or Roblox install runs: RoALT quits for the installer.
 fn idle(s: &App) -> Result<()> {
     if s.bulk.any_busy() {
-        return Err(AppError::Invalid(tr!("Wait for the running launch, batch or auto-rejoin to finish, then update RoALT.")));
+        return Err(AppError::Invalid(tr!("Wait for the running launch, batch or auto-rejoin to finish, then update Ethos Manager.")));
     }
     if s.update.installing() {
-        return Err(AppError::Invalid(tr!("Wait for Roblox's installer to finish, then update RoALT.")));
+        return Err(AppError::Invalid(tr!("Wait for Roblox's installer to finish, then update Ethos Manager.")));
     }
     Ok(())
 }
@@ -437,20 +437,20 @@ fn idle(s: &App) -> Result<()> {
 async fn run_install(s: &App) -> Result<()> {
     idle(s)?;
     let http = http()?;
-    let release = latest(&http).await?.ok_or_else(|| AppError::Invalid(tr!("RoALT is up to date.")))?;
+    let release = latest(&http).await?.ok_or_else(|| AppError::Invalid(tr!("Ethos Manager is up to date.")))?;
     *lock(&s.self_update.available) = Some(release.version.clone());
-    let refused = || AppError::Invalid(tr!("The downloaded RoALT installer was not run: its signature file is malformed."));
+    let refused = || AppError::Invalid(tr!("The downloaded Ethos Manager installer was not run: its signature file is malformed."));
     let sig = get(&http, &release.sig, "application/octet-stream", MAX_SIG, Duration::from_secs(30)).await?;
     let sig = std::str::from_utf8(&sig).ok().and_then(base64).filter(|s| s.len() == 64).ok_or_else(refused)?;
     let bytes = get(&http, &release.exe, "application/octet-stream", MAX_INSTALLER, Duration::from_secs(600)).await?;
 
     let dir = TempDir::new(TEMP_PREFIX)?;
-    let exe = dir.0.join(format!("RoALT-Setup-{}.exe", release.version));
+    let exe = dir.0.join(format!("EthosManager-Setup-{}.exe", release.version));
     let (checked, version) = (exe.clone(), release.version.clone());
     let pinned = blocking(move || write_verified(&checked, &version, &bytes, &sig, &public_key())).await?;
     // Again: one may have started during the download, and quitting now would cut it off.
     idle(s)?;
-    log::info!("running RoALT {}'s installer (signature checked)", release.version);
+    log::info!("running Ethos Manager {}'s installer (signature checked)", release.version);
     Command::new(&exe)
         .args(INSTALLER_ARGS)
         .current_dir(&dir.0)
@@ -458,7 +458,7 @@ async fn run_install(s: &App) -> Result<()> {
         .stdout(Stdio::null())
         .stderr(Stdio::null())
         .spawn()
-        .map_err(|e| AppError::Internal(tr!("Could not start RoALT's installer: {why}", why = e)))?;
+        .map_err(|e| AppError::Internal(tr!("Could not start Ethos Manager's installer: {why}", why = e)))?;
     // The installer runs from the folder: kept (write-locked until RoALT exits) for the next start
     // to delete.
     std::mem::forget((pinned, dir));
@@ -513,8 +513,8 @@ mod tests {
 
     fn with_sig(mut v: Value) -> Value {
         let mut sig = v["assets"][0].clone();
-        sig["name"] = "RoALT-Setup-0.5.1.exe.sig".into();
-        sig["browser_download_url"] = "https://github.com/inspectsoftware/RoALT/releases/download/v0.5.1/RoALT-Setup-0.5.1.exe.sig".into();
+        sig["name"] = "EthosManager-Setup-0.5.1.exe.sig".into();
+        sig["browser_download_url"] = "https://github.com/jashxn/ethos-manager/releases/download/v0.5.1/EthosManager-Setup-0.5.1.exe.sig".into();
         v["assets"].as_array_mut().unwrap().push(sig);
         v
     }
@@ -537,8 +537,8 @@ mod tests {
             pick(&body(&signed), "0.5.0").unwrap(),
             Some(Release {
                 version: "0.5.1".into(),
-                exe: "https://github.com/inspectsoftware/RoALT/releases/download/v0.5.1/RoALT-Setup-0.5.1.exe".into(),
-                sig: "https://github.com/inspectsoftware/RoALT/releases/download/v0.5.1/RoALT-Setup-0.5.1.exe.sig".into(),
+                exe: "https://github.com/jashxn/ethos-manager/releases/download/v0.5.1/EthosManager-Setup-0.5.1.exe".into(),
+                sig: "https://github.com/jashxn/ethos-manager/releases/download/v0.5.1/EthosManager-Setup-0.5.1.exe.sig".into(),
             })
         );
         for flag in ["draft", "prerelease"] {
@@ -548,13 +548,13 @@ mod tests {
         }
         // Asset names must match exactly, and come from github.com over https.
         for (field, value) in [
-            ("name", "roalt-setup-0.5.1.exe"),
-            ("browser_download_url", "http://github.com/inspectsoftware/RoALT/releases/download/v0.5.1/RoALT-Setup-0.5.1.exe"),
-            ("browser_download_url", "https://evil.example/RoALT-Setup-0.5.1.exe"),
-            ("browser_download_url", "https://github.com.evil.example/RoALT-Setup-0.5.1.exe"),
-            ("browser_download_url", "https://github.com:8443/RoALT-Setup-0.5.1.exe"),
-            ("browser_download_url", "https://user@github.com/RoALT-Setup-0.5.1.exe"),
-            ("browser_download_url", "https://objects.githubusercontent.com/RoALT-Setup-0.5.1.exe"),
+            ("name", "ethosmanager-setup-0.5.1.exe"),
+            ("browser_download_url", "http://github.com/jashxn/ethos-manager/releases/download/v0.5.1/EthosManager-Setup-0.5.1.exe"),
+            ("browser_download_url", "https://evil.example/EthosManager-Setup-0.5.1.exe"),
+            ("browser_download_url", "https://github.com.evil.example/EthosManager-Setup-0.5.1.exe"),
+            ("browser_download_url", "https://github.com:8443/EthosManager-Setup-0.5.1.exe"),
+            ("browser_download_url", "https://user@github.com/EthosManager-Setup-0.5.1.exe"),
+            ("browser_download_url", "https://objects.githubusercontent.com/EthosManager-Setup-0.5.1.exe"),
         ] {
             let mut v = signed.clone();
             v["assets"][0][field] = value.into();
@@ -590,11 +590,11 @@ mod tests {
 
     /// A throwaway key made with Node for this test only (crypto.generateKeyPairSync("ec",
     /// P-256), crypto.sign("sha256", MESSAGE, { dsaEncoding: "ieee-p1363" })), as release.yml
-    /// signs `RoALT-Setup-0.6.0.exe\n` + DATA.
-    const TEST_KEY: &str = "1bb1dec977d50faa29ab7620751690b318bd88e35f0b2d851d74f6440b34eacdc64b254b1782dede62cfc67f513e25d2f426e29e26e95c23a50d09d981be94e7";
-    const MESSAGE: &[u8] = b"RoALT-Setup-0.6.0.exe\nRoALT self-update test vector";
-    const DATA: &[u8] = b"RoALT self-update test vector";
-    const SIGNATURE: &str = "LB7tyBAyRL8yzNJpASkt8mSei6PK6hRkdGh0YjzcF9UDsTqFmE2x7R9ejg5theR7L4bEFxa8O45e62NRjaySWg==";
+    /// signs `EthosManager-Setup-0.6.0.exe\n` + DATA.
+    const TEST_KEY: &str = "879be3abc5df313c004c6480835f99a7883629a91064d1b1ef5932f2e6226a8ce10368e2e367697092e4af10151ab3dbb4339d634eafba7fb0c37b571fbe21bf";
+    const MESSAGE: &[u8] = b"EthosManager-Setup-0.6.0.exe\nEthos Manager self-update test vector";
+    const DATA: &[u8] = b"Ethos Manager self-update test vector";
+    const SIGNATURE: &str = "DRd3qGHqxoHmJUQVnTupPlHi9CqOiqAWA9/HGryIXXC20o4IIHs6MJnis0IVBBwqkY9xe2u//k7JBTeGg7DlDQ==";
 
     fn test_key() -> [u8; 64] {
         let mut k = [0; 64];
@@ -609,7 +609,7 @@ mod tests {
         let (key, sig) = (test_key(), base64(SIGNATURE).unwrap());
         assert_eq!([signed_prefix("0.6.0"), DATA.to_vec()].concat(), MESSAGE);
         assert!(verify(&key, MESSAGE, &sig));
-        assert!(!verify(&key, b"RoALT-Setup-0.6.0.exe\nRoALT self-update test vectoR", &sig), "other data");
+        assert!(!verify(&key, b"EthosManager-Setup-0.6.0.exe\nEthos Manager self-update test vectoR", &sig), "other data");
         assert!(!verify(&key, DATA, &sig), "without the version");
         let mut flipped = sig.clone();
         flipped[10] ^= 1;

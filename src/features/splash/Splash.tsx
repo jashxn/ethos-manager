@@ -72,7 +72,7 @@ export function Splash() {
       </div>
       <div className="mark">
         <div className="word">
-          <b>ROALT</b>
+          <b>ETHOS MANAGER</b>
           <span>v{import.meta.env.APP_VERSION}</span>
         </div>
       </div>

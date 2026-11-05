@@ -18,7 +18,7 @@ use crate::model::{Instance, InstanceState};
 
 /// The "RoALT" application on Discord's Developer Portal; its art asset `roalt` is the logo.
 const CLIENT_ID: &str = "1565066775752741165";
-const DOWNLOAD: &str = "https://github.com/inspectsoftware/RoALT/releases/latest";
+const DOWNLOAD: &str = "https://github.com/jashxn/ethos-manager/releases/latest";
 const INVITE: &str = "https://discord.gg/qcj68tHKCX";
 /// Discord allows about 5 activity updates per 20 s; one is sent only when it changed.
 const TICK: Duration = Duration::from_secs(5);
@@ -128,9 +128,9 @@ fn activity((details, state): &(String, String), since_ms: i64) -> Value {
         "details": details,
         "state": state,
         "timestamps": { "start": since_ms / 1000 },
-        "assets": { "large_image": "roalt", "large_text": format!("RoALT · {}", tr!("Managing Roblox alts")) },
+        "assets": { "large_image": "roalt", "large_text": format!("Ethos Manager · {}", tr!("Managing Roblox alts")) },
         "buttons": [
-            { "label": tr!("Get RoALT"), "url": DOWNLOAD },
+            { "label": tr!("Get Ethos Manager"), "url": DOWNLOAD },
             { "label": tr!("Join Discord"), "url": INVITE },
         ],
     })
@@ -257,7 +257,7 @@ mod tests {
     fn activity_has_both_buttons() {
         let a = activity(&("Idling".into(), "Managing Roblox alts".into()), 5_000);
         assert_eq!(a["timestamps"]["start"], 5);
-        assert_eq!(a["buttons"][0]["label"], "Get RoALT");
+        assert_eq!(a["buttons"][0]["label"], "Get Ethos Manager");
         assert_eq!(a["buttons"][1]["url"], INVITE);
     }
 }

@@ -69,7 +69,7 @@ const SHORTCUTS: [Key, string][] = [
 ];
 
 const backupFilter = () => [{ name: t("settings.backupFilter"), extensions: ["roalt"] }];
-const RELEASES = "https://github.com/inspectsoftware/RoALT/releases";
+const RELEASES = "https://github.com/jashxn/ethos-manager/releases";
 const cancelled = () => ({ kind: "cancelled", message: "" });
 
 type VaultDialog = "set" | "change" | "remove" | "export";
@@ -139,7 +139,7 @@ export function SettingsView({ vault, settings, onPerformance, onRecoveryCode }:
         <header className="flex flex-wrap items-start justify-between gap-3 mb-2">
           <h1 className="page-title">{t("settings.title")}</h1>
           <dl aria-label={t("settings.section.about")} className="panel grid grid-cols-[auto_minmax(0,1fr)] gap-x-3 gap-y-0.5 px-3.5 py-2 text-[13px] max-w-[280px]">
-            <dt className="text-dim">RoALT</dt>
+            <dt className="text-dim">Ethos Manager</dt>
             <dd className="mono truncate">{import.meta.env.APP_VERSION}</dd>
             <dt className="text-dim">Roblox</dt>
             <dd className="mono truncate" title={client?.version ?? undefined}>{client?.version ?? t("settings.versionUnknown")}</dd>
@@ -316,7 +316,7 @@ export function SettingsView({ vault, settings, onPerformance, onRecoveryCode }:
 
         <Section id="about" title={t("settings.section.about")}>
         <SelfUpdateRow on={settings.selfUpdate} onChange={(selfUpdate) => set.mutate({ selfUpdate })} />
-        <Row title={<>RoALT <span className="mono">{import.meta.env.APP_VERSION}</span></>} hint={t("settings.aboutHint")} last>
+        <Row title={<>Ethos Manager <span className="mono">{import.meta.env.APP_VERSION}</span></>} hint={t("settings.aboutHint")} last>
           <button className="btn" onClick={() => openUrl(RELEASES).catch(toastError)}>
             {t("settings.openReleases")}
             <Icon name="external" size={12} />
@@ -506,7 +506,7 @@ export function SettingsView({ vault, settings, onPerformance, onRecoveryCode }:
         nextLabel={t("settings.backupPassword")}
         onSubmit={async ({ current, next }) => {
           const date = new Date().toISOString().slice(0, 10);
-          const path = await saveFile({ defaultPath: `RoALT-backup-${date}.roalt`, filters: backupFilter() });
+          const path = await saveFile({ defaultPath: `EthosManager-backup-${date}.roalt`, filters: backupFilter() });
           if (!path) throw cancelled();
           const n = await api.backupExport(path, next, master ? current : undefined);
           toast(t("settings.exported", { count: n }));
