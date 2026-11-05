@@ -1,0 +1,15 @@
+{
+  "id": "bridge.crypto.handshake-reflected-proof-invalid",
+  "valid": false,
+  "value": {
+    "kind": "handshake",
+    "token": "7f3c9a1e5b2d4f60718293a4b5c6d7e8f90a1b2c3d4e5f60718293a4b5c6d7e8",
+    "port": 51734,
+    "nc": "61c3a46f9de2f8fe55aad88d2d21c243ccf7a99b8ced3c68b99de3b579a272c3",
+    "ns": "5b7687b0d4f2e27712388be3eb5cc1963b6700e57325a330f9f08905aa5e552a",
+    "source": "return function(ctx) end",
+    "sourceHash": "cf2615b3b4daf7817cc83fde8196c45e9830a57a605306c7606463346b128650",
+    "clientProof": "cc4dffa7a19dc4e7297f0d41b0e9ba85d023a83a535adce0dc354d22a9328d0f",
+    "serverProof": "cc4dffa7a19dc4e7297f0d41b0e9ba85d023a83a535adce0dc354d22a9328d0f"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "id": "bridge.crypto.hmac-rfc4231-3-valid",
+  "valid": true,
+  "value": {
+    "kind": "hmac",
+    "keyHex": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "messageHex": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+    "expected": "773ea91e36800e46854db8ebd09181a72959098b3ef8c122d9635514ced565fe"
+  }
+}

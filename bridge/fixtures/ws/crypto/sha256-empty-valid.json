@@ -1,0 +1,9 @@
+{
+  "id": "bridge.crypto.sha256-empty-valid",
+  "valid": true,
+  "value": {
+    "kind": "sha256",
+    "messageHex": "",
+    "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
